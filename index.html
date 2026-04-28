@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomaru細野 — A Quiet House in Ginzan</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; color: var(--kinari) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #F8F3E9 0%, #EDE7D8 55%, #E0D8C5 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 39%, rgba(43,42,40,0.025) 39% 40%, transparent 40% 100%),
+    repeating-linear-gradient(0deg, transparent 0 32%, rgba(43,42,40,0.025) 32% 33%, transparent 33% 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: var(--koshoku);
+  letter-spacing: 0.38em; margin-bottom: 36px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--koshoku); opacity: 0.5;
+}
+.hero h1 {
+  font-size: clamp(32px, 4.5vw, 52px); font-weight: 400; line-height: 1.65;
+  color: var(--sumi); margin-bottom: 20px;
+}
+.hero h1 .accent { color: var(--toki); }
+.hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic; color: var(--koshoku);
+  letter-spacing: 0.12em; margin-bottom: 60px;
+}
+.hero-ctas { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-outline {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--sumi); text-decoration: none;
+  border: 1px solid rgba(43,42,40,0.6); padding: 16px 40px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-outline:hover { background: var(--sumi); color: var(--kinari); }
+.btn-primary {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  background: var(--toki); padding: 16px 40px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block; border: 1px solid var(--toki);
+}
+.btn-primary:hover { background: #A5604F; border-color: #A5604F; }
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px;
+  letter-spacing: 0.45em; color: var(--koshoku);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-line {
+  width: 1px; height: 40px; background: linear-gradient(180deg, transparent, var(--koshoku));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.6)} 50%{opacity:1;transform:scaleY(1)} }
+
+/* ── POEM ── */
+.poem {
+  padding: 140px 24px 100px;
+  text-align: center;
+}
+.poem p {
+  font-size: clamp(16px, 2.2vw, 22px); line-height: 2.5;
+  max-width: 560px; margin: 0 auto; font-weight: 300;
+}
+.poem-divider {
+  width: 1px; height: 80px;
+  background: linear-gradient(180deg, transparent, var(--koshoku), transparent);
+  margin: 0 auto 60px;
+}
+
+/* ── SECTION BASE ── */
+.section-wrap {
+  max-width: 1000px; margin: 0 auto; padding: 0 56px;
+}
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px; max-width: 580px;
+}
+.body-text {
+  font-size: 15px; line-height: 2.0; max-width: 540px;
+  color: rgba(43,42,40,0.82);
+}
+.lead-text {
+  font-size: 17px; line-height: 2.1; max-width: 560px;
+  margin-bottom: 24px;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center; padding: 100px 56px;
+  max-width: 1100px; margin: 0 auto;
+}
+.about-img {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, #DDD4BB 0%, #C0B090 40%, #8A7A5C 100%);
+  position: relative; overflow: hidden;
+}
+.img-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 40px 24px 20px;
+  background: linear-gradient(0deg, rgba(43,42,40,0.5) 0%, transparent 100%);
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; color: rgba(243,238,229,0.8); letter-spacing: 0.2em;
+  font-weight: 300;
+}
+
+/* ── FULL IMG BAND ── */
+.full-img {
+  height: clamp(280px, 40vh, 480px);
+  background: linear-gradient(135deg, #D4C9B0 0%, #B8A788 50%, #8A7A5C 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.full-img-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(243,238,229,0.7); letter-spacing: 0.2em;
+  text-align: center;
+}
+
+/* ── ROOMS ── */
+.rooms-section { padding: 120px 0; background: #EDE7D8; }
+.rooms-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.room-card { position: relative; overflow: hidden; cursor: pointer; }
+.room-img {
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg, #D8CCB5 0%, #BBA882 50%, #8A7A5C 100%);
+  transition: transform 0.6s ease;
+}
+.room-card:hover .room-img { transform: scale(1.04); }
+.room-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 60px 24px 28px;
+  background: linear-gradient(0deg, rgba(43,42,40,0.72) 0%, transparent 100%);
+  color: var(--kinari);
+}
+.room-name {
+  font-size: 18px; font-weight: 400; margin-bottom: 6px; letter-spacing: 0.1em;
+}
+.room-en {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; color: rgba(243,238,229,0.7); letter-spacing: 0.2em;
+}
+
+/* ── DAY FLOW ── */
+.day-section { padding: 120px 0; }
+.day-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; margin-top: 64px; border-top: 1px solid rgba(138,122,92,0.2);
+}
+.day-card {
+  padding: 48px 40px 48px;
+  border-right: 1px solid rgba(138,122,92,0.2);
+  transition: background 0.4s;
+}
+.day-card:last-child { border-right: none; }
+.day-card:hover { background: rgba(138,122,92,0.04); }
+.day-time {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; color: var(--toki); letter-spacing: 0.35em;
+  display: block; margin-bottom: 20px;
+}
+.day-title {
+  font-size: 20px; font-weight: 400; margin-bottom: 16px;
+  letter-spacing: 0.06em;
+}
+.day-body { font-size: 14px; line-height: 2.0; color: rgba(43,42,40,0.78); }
+
+/* ── ACCESS ── */
+.access-section { padding: 120px 0; background: #EDE7D8; }
+.access-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start; margin-top: 56px;
+}
+.access-map {
+  aspect-ratio: 4/3;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 19px, rgba(138,122,92,0.08) 19px 20px),
+    repeating-linear-gradient(90deg, transparent 0 19px, rgba(138,122,92,0.08) 19px 20px),
+    #E8E0D0;
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.map-pin {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--toki); box-shadow: 0 0 0 6px rgba(193,122,111,0.2);
+}
+.map-label-text {
+  position: absolute; bottom: 16px; right: 20px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 11px; color: var(--koshoku); letter-spacing: 0.15em;
+}
+.access-list { list-style: none; }
+.access-list li {
+  padding: 18px 0; border-bottom: 1px solid rgba(138,122,92,0.15);
+  display: grid; grid-template-columns: 90px 1fr; gap: 20px;
+}
+.access-list li:first-child { border-top: 1px solid rgba(138,122,92,0.15); }
+.access-key {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; color: var(--toki); letter-spacing: 0.2em;
+}
+.access-val { font-size: 14px; line-height: 1.8; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 140px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 16px; max-width: 640px; margin-left: auto; margin-right: auto;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.18em; margin-bottom: 52px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+.cta-note {
+  display: block; margin-top: 32px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(138,122,92,0.7); letter-spacing: 0.18em;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(43,42,40,0.75);
+  backdrop-filter: blur(6px); z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--kinari); max-width: 560px; width: 90%;
+  padding: 56px 48px; position: relative;
+  transform: translateY(20px); transition: transform 0.4s ease;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 20px; right: 24px;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  color: var(--koshoku); transition: color 0.3s;
+}
+.modal-close:hover { color: var(--toki); }
+.modal-tag {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.3em;
+  display: block; margin-bottom: 20px;
+}
+.modal h3 {
+  font-size: 24px; font-weight: 400; margin-bottom: 16px;
+  line-height: 1.6;
+}
+.modal p { font-size: 14px; color: rgba(43,42,40,0.75); margin-bottom: 32px; line-height: 2.0; }
+.modal-options { display: flex; flex-direction: column; gap: 12px; }
+.modal-option {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border: 1px solid rgba(138,122,92,0.25);
+  text-decoration: none; color: var(--sumi);
+  transition: all 0.3s ease; font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; font-weight: 300; letter-spacing: 0.15em;
+}
+.modal-option:hover { background: var(--sumi); color: var(--kinari); border-color: var(--sumi); }
+.modal-option .arrow {
+  font-family: serif; font-size: 16px; transition: transform 0.3s;
+}
+.modal-option:hover .arrow { transform: translateX(4px); }
+.modal-direct {
+  background: var(--toki); border-color: var(--toki); color: var(--kinari);
+}
+.modal-direct:hover { background: #A5604F; border-color: #A5604F; color: var(--kinari); }
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
+  .rooms-grid { grid-template-columns: 1fr; }
+  .day-grid { grid-template-columns: 1fr; }
+  .day-card { border-right: none; border-bottom: 1px solid rgba(138,122,92,0.2); }
+  .access-grid { grid-template-columns: 1fr; gap: 40px; }
+  .section-wrap { padding: 0 24px; }
+  .poem { padding: 100px 24px 80px; }
+  .cta-band { padding: 100px 24px; }
+  footer { padding: 56px 24px 40px; }
+  .modal { padding: 40px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="#" class="brand">TOMARU HOSONO<small></small></a>
+  <div class="nav-links">
+    <a href="#about">宿のご紹介</a>
+    <a href="#rooms">部屋と設え</a>
+    <a href="#stay">過ごし方</a>
+    <a href="#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=TOMARU_HOSONO_PLACEHOLDER" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">A QUIET HOUSE IN OBANAZAWA</div>
+    <h1>時間が、ゆっくり<span class="accent">降りてくる</span>家。</h1>
+    <div class="hero-en">Where time settles slowly, and nothing is asked of you.</div>
+    <div class="hero-ctas">
+      <a href="#about" class="btn-outline">宿のことを知る</a>
+      <a href="https://beds24.com/booking2.php?propid=TOMARU_HOSONO_PLACEHOLDER" target="_blank" rel="noopener" class="btn-primary">空室を確認する</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- POEM -->
+<section class="poem">
+  <div class="poem-divider"></div>
+  <p class="fade-up">
+    銀山温泉まで、車でわずか18分。<br>
+    一歩、玄関を入れば、障子越しの光と静けさがある。
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-grid">
+  <div class="about-img fade-up" style="background-image: url('images/about.jpg'); background-size: cover; background-position: center;"></div>
+  <div>
+    <span class="chapter-label fade-up">— Chapter 01 —</span>
+    <h2 class="section-h2 fade-up">家は、百年分の<br>静けさを蓄えている。</h2>
+    <p class="lead-text fade-up d1">
+      築100年以上の古民家。柱の艶、梁の影、畳の手ざわり。すべてが、これまでこの家を通り過ぎていった人々の時間でできています。
+    </p>
+    <p class="body-text fade-up d2">
+      手を入れたのは、水回りだけ。障子と格子の木細工、襖に描かれた絵、板張りの廊下——昔ながらの日本家屋の良さは、そのまま残しています。
+      あなたの滞在も、やがてこの家の記憶の一部になります。
+    </p>
+    <div style="margin-top: 40px; display: flex; gap: 40px;" class="fade-up d3">
+      <div style="text-align: center;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 28px; color: var(--toki); line-height: 1;">100年以上</div>
+        <div style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--koshoku); margin-top: 6px;">築</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 28px; color: var(--toki); line-height: 1;">最大8名</div>
+        <div style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--koshoku); margin-top: 6px;">定員</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 28px; color: var(--toki); line-height: 1;">4室</div>
+        <div style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--koshoku); margin-top: 6px;">客室</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL IMG BAND -->
+<div class="full-img" style="background: url('images/fullimg.jpg') right center / cover;">
+  <div class="full-img-label"></div>
+</div>
+
+<!-- ROOMS -->
+<section id="rooms" class="rooms-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Chapter 02 —</span>
+    <h2 class="section-h2 fade-up">部屋は、それぞれ<br>違う沈黙を持っている。</h2>
+  </div>
+  <div class="rooms-grid" style="margin-top: 56px;">
+    <div class="room-card fade-up d1">
+      <div class="room-img" style="background-image: url('images/room1.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="room-info">
+        <div class="room-name">梁の間</div>
+        <div class="room-en">The Beam Room</div>
+      </div>
+    </div>
+    <div class="room-card fade-up d2">
+      <div class="room-img" style="background-image: url('images/room2.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="room-info">
+        <div class="room-name">縁の間</div>
+        <div class="room-en">The Veranda Room</div>
+      </div>
+    </div>
+    <div class="room-card fade-up d3">
+      <div class="room-img" style="background-image: url('images/room3.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="room-info">
+        <div class="room-name">藍の間</div>
+        <div class="room-en">The Indigo Room</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY FLOW -->
+<section id="stay" class="day-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Chapter 03 —</span>
+    <h2 class="section-h2 fade-up">何もしない、を<br>予定に入れる。</h2>
+  </div>
+  <div class="day-grid" style="max-width: 1000px; margin: 64px auto 0; padding: 0 56px;">
+    <div class="day-card fade-up d1">
+      <span class="day-time">MORNING</span>
+      <div class="day-title">朝のひかり</div>
+      <p class="day-body">障子越しに差す柔らかな光のなかで、目を覚ます。時計は必要ありません。</p>
+    </div>
+    <div class="day-card fade-up d2">
+      <span class="day-time">AFTERNOON</span>
+      <div class="day-title">昼の余白</div>
+      <p class="day-body">銀山温泉まで散歩。あるいは、本を一冊。読みかけのまま昼寝するのも、ここでは礼儀のうちです。</p>
+    </div>
+    <div class="day-card fade-up d3">
+      <span class="day-time">EVENING</span>
+      <div class="day-title">夜の灯</div>
+      <p class="day-body">障子越しに差す灯りのなかで、静かに夜を過ごす。夜が更けるほど、家はやさしく沈んでいきます。</p>
+    </div>
+  </div>
+  <div style="margin-top: 80px; background-image: url('images/dayflow.jpg'); width: 100%; background-size: cover; background-position: center center; height: 330px;"></div>
+</section>
+
+<!-- ACCESS -->
+<section id="access" class="access-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Chapter 04 —</span>
+    <h2 class="section-h2 fade-up">銀山は、訪ねる場所。<br>帰る場所は、ここ。</h2>
+    <div class="access-grid fade-up">
+      <div class="access-map">
+        <div class="map-pin"></div>
+        <div class="map-label-text">Obanazawa, Yamagata</div>
+      </div>
+      <div>
+        <ul class="access-list">
+          <li>
+            <span class="access-key">Address</span>
+            <span class="access-val">山形県尾花沢市細野552<br>（銀山温泉より車18分）</span>
+          </li>
+          <li>
+            <span class="access-key">Train</span>
+            <span class="access-val">JR奥羽本線・大石田駅より<br>タクシー約30分</span>
+          </li>
+          <li>
+            <span class="access-key">Car</span>
+            <span class="access-val">山形自動車道・村山ICより<br>約40分</span>
+          </li>
+          <li>
+            <span class="access-key">Airport</span>
+            <span class="access-val">山形空港より約1時間</span>
+          </li>
+          <li>
+            <span class="access-key">Check-in</span>
+            <span class="access-val">直販予約 14:00〜 / OTA予約 15:00〜 / Check-out 11:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>今夜の静けさを、<br>予約してください。</h2>
+  <span class="sub">— Reserve your quiet —</span>
+  <div class="cta-btns">
+    <a href="https://beds24.com/booking2.php?propid=TOMARU_HOSONO_PLACEHOLDER" target="_blank" rel="noopener" class="btn-white">空室カレンダーを見る</a>
+    <a href="https://beds24.com/booking2.php?propid=TOMARU_HOSONO_PLACEHOLDER" target="_blank" rel="noopener" class="btn-toki">今すぐ予約する</a>
+  </div>
+  <span class="cta-note"></span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO — 細野</span>
+  <div class="footer-links">
+    <a href="#about">家のこと</a>
+    <a href="#rooms">部屋と設え</a>
+    <a href="#stay">過ごし方</a>
+    <a href="#access">アクセス</a>
+    <a href="mailto:info@tomaru-hosono.jp">お問い合わせ</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野552<br>
+    info@tomaru-hosono.jp<br>
+    <br>
+    &copy; 2026 Tomaru細野. All rights reserved.
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close-btn">&#x2715;</button>
+    <span class="modal-tag">— RESERVATION —</span>
+    <h3>ご予約・空室確認</h3>
+    <p>下記よりご希望の方法でご予約ください。直接ご予約の方にはウェルカムギフトをご用意しています。</p>
+    <div class="modal-options">
+      <a href="https://beds24.com/booking2.php?propid=TOMARU_HOSONO_PLACEHOLDER" target="_blank" rel="noopener" class="modal-option modal-direct">
+        <span>空室カレンダーを見る・予約する</span>
+        <span class="arrow">&#x2192;</span>
+      </a>
+      <a href="mailto:info@tomaru-hosono.jp?subject=ご予約のお問い合わせ" class="modal-option">
+        <span>メールでお問い合わせ</span>
+        <span class="arrow">&#x2192;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ── Scroll nav ──
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // ── Modal open/close ──
+  var modal = document.getElementById('booking-modal');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Fade-up (IntersectionObserver) ──
+  var fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(function (el) { io.observe(el); });
+  } else {
+    // Fallback for old browsers
+    fadeEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>
