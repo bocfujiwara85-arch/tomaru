@@ -32,7 +32,13 @@
       "Bash(sed -i s/大人二名から四名、十六歳以上、二泊から。銀山温泉まで車で約十八分。/最大八名、お子様可、二泊から。銀山温泉まで車で約十八分。/g c:/Users/bocfu/Desktop/民泊事業関連/民泊事業/Tomaru細野_Wixサイトコピー集.md)",
       "Bash(sed -i s/銀山温泉まで車で二十分ほど、外湯に浸かって/銀山温泉まで車で十八分ほど、外湯に浸かって/g c:/Users/bocfu/Desktop/民泊事業関連/民泊事業/Tomaru細野_Wixサイトコピー集.md)",
       "Bash(sed -i 's/大人二名から四名、十六歳以上、二泊から。$/最大八名、お子様可、二泊から。/g' c:/Users/bocfu/Desktop/民泊事業関連/民泊事業/Tomaru細野_Wixサイトコピー集.md)",
-      "Bash(sed -i s/大人二〜四名・十六歳以上・二泊から/最大八名・お子様可・二泊から/g c:/Users/bocfu/Desktop/民泊事業関連/民泊事業/Tomaru細野_Wixサイトコピー集.md)"
+      "Bash(sed -i s/大人二〜四名・十六歳以上・二泊から/最大八名・お子様可・二泊から/g c:/Users/bocfu/Desktop/民泊事業関連/民泊事業/Tomaru細野_Wixサイトコピー集.md)",
+      "mcp__claude_ai_Stripe__stripe_api_execute",
+      "mcp__claude_ai_Stripe__stripe_api_search",
+      "mcp__claude_ai_Stripe__stripe_api_details",
+      "mcp__claude_ai_Stripe__fetch_stripe_resources",
+      "mcp__claude_ai_Stripe__search_stripe_resources",
+      "WebFetch(domain:buy.stripe.com)"
     ]
   }
 }
