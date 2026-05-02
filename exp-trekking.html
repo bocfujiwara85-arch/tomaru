@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>里山トレッキング滞在 — Tomaru Hosono | Mt. Odohsan Yamagata Trekking</title>
+<meta name="description" content="Trekking experience on Mt. Odohsan, one of Japan's 100 Famous Mountains. Iwauchiwa wildflowers in spring, ridge traverse in autumn. Guided by the Hosono Mountain Lovers Association.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 640px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #5C6A4E 0%, #3D4E35 45%, #1E2B1A 100%);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(30,43,26,0.6) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 39%, rgba(243,238,229,0.03) 39% 40%, transparent 40% 100%),
+    repeating-linear-gradient(0deg, transparent 0 32%, rgba(243,238,229,0.03) 32% 33%, transparent 33% 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 24px; }
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: rgba(243,238,229,0.65);
+  letter-spacing: 0.38em; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 36px; height: 1px;
+  background: rgba(243,238,229,0.4);
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 50px); font-weight: 400; line-height: 1.65;
+  color: var(--kinari); margin-bottom: 18px;
+}
+.hero-catch {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.8vw, 28px); font-style: italic;
+  color: rgba(243,238,229,0.85); letter-spacing: 0.08em; margin-bottom: 16px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.12em; margin-bottom: 56px; line-height: 1.8;
+}
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px;
+  letter-spacing: 0.45em; color: rgba(243,238,229,0.5);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(243,238,229,0.5));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.6)} 50%{opacity:1;transform:scaleY(1)} }
+
+/* ── SECTION BASE ── */
+.section-wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; }
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px; max-width: 600px;
+}
+.body-text {
+  font-size: 15px; line-height: 2.0; max-width: 600px;
+  color: rgba(43,42,40,0.82);
+}
+.breadcrumb {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; color: rgba(243,238,229,0.5); margin-bottom: 48px;
+}
+.breadcrumb a { color: rgba(243,238,229,0.5); text-decoration: none; }
+.breadcrumb-sep { margin: 0 10px; opacity: 0.5; }
+
+/* ── BODY SECTION ── */
+.body-section { padding: 100px 0 80px; }
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.body-en {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-style: italic; line-height: 2.0; color: rgba(43,42,40,0.65);
+  letter-spacing: 0.04em;
+}
+
+/* ── SCHEDULE ── */
+.schedule-section { padding: 80px 0 100px; background: #EDE7D8; }
+.schedule-table {
+  width: 100%; border-collapse: collapse; margin-top: 48px;
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+}
+.schedule-table th {
+  text-align: left; padding: 14px 20px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.3em; color: var(--toki);
+  border-bottom: 1px solid rgba(138,122,92,0.3);
+}
+.schedule-table td {
+  padding: 20px; font-size: 14px; line-height: 1.8;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  vertical-align: top;
+}
+.schedule-table tr:hover td { background: rgba(138,122,92,0.04); }
+.event-date {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: var(--toki); white-space: nowrap;
+}
+.event-name { font-size: 15px; font-weight: 400; margin-bottom: 4px; }
+.event-detail { font-size: 13px; color: rgba(43,42,40,0.65); }
+.event-deadline {
+  font-size: 12px; color: var(--koshoku);
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.event-fee {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  color: var(--sumi); white-space: nowrap;
+}
+
+/* ── PRICING ── */
+.pricing-section { padding: 80px 0; }
+.price-cards {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 2px; margin-top: 48px;
+}
+.price-card {
+  padding: 40px 36px;
+  background: #EDE7D8;
+  border-top: 2px solid var(--kokeiro);
+}
+.price-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.3em;
+  display: block; margin-bottom: 16px;
+}
+.price-name { font-size: 17px; font-weight: 400; margin-bottom: 12px; }
+.price-amount {
+  font-family: 'Cormorant Garamond', serif; font-size: 36px;
+  color: var(--sumi); line-height: 1; margin-bottom: 8px;
+}
+.price-amount span { font-size: 16px; }
+.price-note { font-size: 13px; color: rgba(43,42,40,0.65); line-height: 1.8; }
+
+/* ── BOOK CTA ── */
+.book-section { padding: 100px 0; text-align: center; }
+.book-section .section-h2 { max-width: 700px; margin: 0 auto 40px; }
+.btn-primary {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  background: var(--toki); padding: 18px 52px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+  border: 1px solid var(--toki);
+}
+.btn-primary:hover { background: #A5604F; border-color: #A5604F; }
+.btn-outline {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--sumi); text-decoration: none;
+  border: 1px solid rgba(43,42,40,0.5); padding: 18px 52px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-outline:hover { background: var(--sumi); color: var(--kinari); }
+.btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.book-note {
+  display: block; margin-top: 28px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(43,42,40,0.5); letter-spacing: 0.15em;
+}
+
+/* ── BACK LINK ── */
+.back-section { padding: 48px 0; border-top: 1px solid rgba(138,122,92,0.15); }
+.back-link {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 300;
+  letter-spacing: 0.18em; color: var(--koshoku); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: color 0.3s;
+}
+.back-link:hover { color: var(--toki); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 100px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(20px, 2.8vw, 30px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 14px;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.5);
+  letter-spacing: 0.18em; margin-bottom: 48px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .price-cards { grid-template-columns: 1fr; }
+  .cta-band { padding: 80px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html" class="active">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="breadcrumb-sep">—</span>
+      <a href="experiences.html">EXPERIENCES</a>
+      <span class="breadcrumb-sep">—</span>
+      <span>TREKKING</span>
+    </div>
+    <div class="hero-eyebrow">Package 01 — Mountain & Forest</div>
+    <h1>里山トレッキング滞在</h1>
+    <div class="hero-catch">Step into the mountains of Hosono.</div>
+    <div class="hero-sub">Snow-dusted ridgelines. Spring wildflowers. The quiet of an alpine trail.<br>Walking here means something different.</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="body-section" id="content">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— About This Package —</span>
+    <div class="two-col">
+      <div>
+        <h2 class="section-h2 fade-up">春の山は、<br>歩いて初めて見えてくる。</h2>
+        <p class="body-text fade-up d1">
+          細野の山は、春から初夏にかけて目を覚ます。<br><br>
+          日本百名山のひとつ、御堂森。標高600mを超える斜面に、イワウチワの群生が広がる。4月、残雪を踏みながら山道を登ると、薄紫の花が静かに咲いている。ガイドは地元の山岳会のメンバー。観光ツアーではない。<br><br>
+          5月には山菜の季節が来る。ワラビ、タラの芽、コシアブラ——細野の森が育てた山の恵みを、自分の手で摘む。摘んだものは持ち帰れる。都会では希少なものが、ここでは朝の仕事だ。<br><br>
+          Tomaru細野に泊まり、翌朝山へ向かう。その往復が、旅の骨格になる。
+        </p>
+      </div>
+      <div class="fade-up d2">
+        <p class="body-en">
+          From spring through early summer, the mountains around Hosono come alive.<br><br>
+          On the slopes of Mt. Odohsan — a peak among Japan's celebrated hundred mountains — vast colonies of Iwauchiwa wildflowers spread across elevations above 600 meters. In April, you walk through the last of the snow to reach them. No tour bus. No crowd. A local guide leads you along the ridge.<br><br>
+          In May, the foraging season arrives. Warabi, sansai — wild mountain vegetables nurtured by Hosono's forest. You pick them yourself. Whatever you gather, you take home.<br><br>
+          Stay at Tomaru Hosono, then head into the mountains the next morning. That rhythm — inn, then trail — becomes the spine of the trip.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— 2026 Schedule —</span>
+    <h2 class="section-h2 fade-up">参加できるイベント一覧</h2>
+    <table class="schedule-table fade-up d1">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Event</th>
+          <th>Details</th>
+          <th>Deadline</th>
+          <th>Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="event-date">Apr 12 (Sun)</span></td>
+          <td>
+            <div class="event-name">イワウチワトレッキング</div>
+            <div class="event-detail">Mt. Odohsan Iwauchiwa Wildflower Trekking</div>
+          </td>
+          <td><span class="event-detail">8:00–16:00 / 先着50名<br>Capacity: first 50</span></td>
+          <td><span class="event-deadline">Apr 3</span></td>
+          <td><span class="event-fee">¥2,000</span><br><span class="event-detail">+lunch</span></td>
+        </tr>
+        <tr>
+          <td><span class="event-date">Apr 26 (Sun)</span></td>
+          <td>
+            <div class="event-name">早春御堂森登山</div>
+            <div class="event-detail">Early Spring Mt. Odohsan Ascent (1,057m)</div>
+          </td>
+          <td><span class="event-detail">8:00–16:00 / 先着50名<br>Capacity: first 50</span></td>
+          <td><span class="event-deadline">Apr 17</span></td>
+          <td><span class="event-fee">¥2,000</span><br><span class="event-detail">+lunch</span></td>
+        </tr>
+        <tr>
+          <td><span class="event-date">May 31 (Sun)</span></td>
+          <td>
+            <div class="event-name">山開き・山菜採りツアー</div>
+            <div class="event-detail">Mountain Opening & Wild Vegetable Foraging Tour</div>
+          </td>
+          <td><span class="event-detail">7:30–15:00 / Course A or B<br>先着40名 / first 40</span></td>
+          <td><span class="event-deadline">May 22</span></td>
+          <td><span class="event-fee">¥3,500</span><br><span class="event-detail">incl. transport</span></td>
+        </tr>
+        <tr>
+          <td><span class="event-date">Jun 14 (Sun)</span></td>
+          <td>
+            <div class="event-name">御堂森縦走路登山</div>
+            <div class="event-detail">Mt. Odohsan Ridge Traverse (Grade 4B)</div>
+          </td>
+          <td><span class="event-detail">6:00–16:30 / 先着30名<br>中〜上級者向け</span></td>
+          <td><span class="event-deadline">Jun 5</span></td>
+          <td><span class="event-fee">¥3,000</span><br><span class="event-detail">+lunch, transport</span></td>
+        </tr>
+        <tr>
+          <td><span class="event-date">Oct 11 (Sun)</span></td>
+          <td>
+            <div class="event-name">秋の御堂森縦走</div>
+            <div class="event-detail">Odohsan Long Ridge Traverse — autumn foliage</div>
+          </td>
+          <td><span class="event-detail">6:30–16:30 / 先着30名<br>Capacity: first 30</span></td>
+          <td><span class="event-deadline">Oct 2</span></td>
+          <td><span class="event-fee">¥2,000</span><br><span class="event-detail">+lunch, insurance</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 24px; font-size: 13px; color: rgba(43,42,40,0.6); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; letter-spacing: 0.1em;">
+      ※ 各イベントには申込締切があります。海外からご参加の方はチェックイン6週前までにお申し込みください。<br>
+      Each event has a registration deadline. For international guests, please register at least 6 weeks before check-in.
+    </p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Pricing —</span>
+    <h2 class="section-h2 fade-up">料金について</h2>
+    <div class="price-cards fade-up d1">
+      <div class="price-card">
+        <span class="price-label">Experience Fee</span>
+        <div class="price-name">体験参加費</div>
+        <div class="price-amount">¥2,000 <span>〜 ¥3,500</span></div>
+        <p class="price-note">
+          イベントにより異なります。いずれも宿泊料金とは別途。<br>
+          Varies by event. Separate from accommodation.
+        </p>
+      </div>
+      <div class="price-card">
+        <span class="price-label">Coordination Fee</span>
+        <div class="price-name">コーディネート料</div>
+        <div class="price-amount" style="font-size: 28px; padding-top: 8px;">無料 / Free</div>
+        <p class="price-note">
+          英語サポート・申込代行・当日連絡はすべてTomaru細野が対応します。<br>
+          English support and registration coordination are included at no charge.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section class="book-section">
+  <div class="section-wrap">
+    <span class="chapter-label">— Book This Experience —</span>
+    <h2 class="section-h2" style="max-width: 700px; margin: 0 auto 20px; text-align: center;">
+      参加を申し込む<br>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-style:italic;color:var(--koshoku);font-weight:300;">Book this experience</span>
+    </h2>
+    <p class="body-text" style="text-align: center; margin: 0 auto 40px; max-width: 560px;">
+      下記リンクより参加人数を選択してオンライン決済をお願いします。<br>決済完了後2〜3営業日以内に詳細のご案内をお送りします。
+    </p>
+    <div class="btn-row">
+      <!-- NOTE: Stripe Payment Link — replace href with actual link after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/TREKKING_PLACEHOLDER" class="btn-primary" target="_blank" rel="noopener">
+        里山トレッキング体験を申し込む
+      </a>
+    </div>
+    <span class="book-note">
+      参加には宿泊のご予約が必要です — Accommodation booking required to join.
+    </span>
+  </div>
+</section>
+
+<!-- BACK + STAY CTA -->
+<section class="cta-band">
+  <h2>まず、宿泊を確定させましょう。</h2>
+  <span class="sub">The house comes first. The mountain follows.</span>
+  <div class="cta-btns">
+    <a href="experiences.html" class="btn-white">← 体験パッケージ一覧</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="exp-farm.html">農家と土を触る滞在</a>
+    <a href="exp-soba.html">そばオーナー年3回滞在</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
+    © 2026 Tomaru Hosono. All rights reserved.
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よくある質問 — Tomaru Hosono | FAQ</title>
+<meta name="description" content="よくある質問 / Frequently asked questions about Tomaru Hosono — self check-in, access, experience packages, cancellation policy, and more.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.92);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: 130px; padding-bottom: 80px;
+  text-align: center;
+  background: linear-gradient(180deg, #F8F3E9 0%, #EDE7D8 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0 39%, rgba(43,42,40,0.018) 39% 40%, transparent 40% 100%),
+              repeating-linear-gradient(0deg, transparent 0 32%, rgba(43,42,40,0.018) 32% 33%, transparent 33% 100%);
+}
+.breadcrumb {
+  display: flex; gap: 10px; align-items: center; justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; color: var(--koshoku); margin-bottom: 40px;
+}
+.breadcrumb a { color: var(--koshoku); text-decoration: none; transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--toki); }
+.breadcrumb-sep { opacity: 0.5; }
+.page-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: var(--koshoku);
+  letter-spacing: 0.38em; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.page-eyebrow::before, .page-eyebrow::after {
+  content: ''; display: block; width: 36px; height: 1px; background: var(--koshoku); opacity: 0.5;
+}
+.page-hero h1 {
+  font-size: clamp(26px, 3.2vw, 42px); font-weight: 400; line-height: 1.7;
+  color: var(--sumi); margin-bottom: 14px;
+}
+.page-hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic; color: var(--koshoku);
+  letter-spacing: 0.12em;
+}
+
+/* ── SECTION BASE ── */
+.section-wrap { max-width: 800px; margin: 0 auto; padding: 0 56px; }
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(20px, 2.5vw, 30px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* ── CATEGORY NAV ── */
+.cat-nav {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(138,122,92,0.2);
+  margin-bottom: 0;
+}
+.cat-btn {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: var(--koshoku);
+  padding: 14px 24px; background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all 0.3s;
+  margin-bottom: -1px;
+}
+.cat-btn:hover { color: var(--toki); }
+.cat-btn.active { color: var(--toki); border-bottom-color: var(--toki); }
+
+/* ── FAQ SECTIONS ── */
+.faq-section { padding: 60px 0; }
+.faq-section + .faq-section { border-top: 1px solid rgba(138,122,92,0.1); }
+.faq-list {}
+.faq-item {
+  border-bottom: 1px solid rgba(138,122,92,0.15);
+}
+.faq-item:first-child { border-top: 1px solid rgba(138,122,92,0.15); }
+.faq-toggle {
+  width: 100%; background: none; border: none; cursor: pointer;
+  text-align: left; padding: 26px 0;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
+  transition: color 0.3s;
+}
+.faq-toggle:hover .faq-q-text { color: var(--toki); }
+.faq-q-inner { display: flex; gap: 16px; align-items: flex-start; }
+.faq-q-mark {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 18px; color: var(--toki); flex-shrink: 0; line-height: 1.4; font-weight: 400;
+}
+.faq-q-text {
+  font-size: 15px; font-weight: 400; line-height: 1.7;
+  color: var(--sumi); transition: color 0.3s; text-align: left;
+}
+.faq-q-en {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--koshoku); letter-spacing: 0.06em; display: block;
+  margin-top: 4px; font-weight: 300;
+}
+.faq-arrow {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--koshoku);
+  flex-shrink: 0; transition: transform 0.3s, color 0.3s; line-height: 1.4;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); color: var(--toki); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 0 0 34px;
+}
+.faq-item.open .faq-answer { max-height: 600px; padding: 0 0 28px 34px; }
+.faq-a-text { font-size: 14px; line-height: 2.1; color: rgba(43,42,40,0.78); }
+.faq-a-en {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 14px; color: rgba(43,42,40,0.55); line-height: 2.0; margin-top: 12px; display: block;
+}
+.faq-a-link { color: var(--toki); text-decoration: none; transition: opacity 0.3s; }
+.faq-a-link:hover { opacity: 0.75; }
+
+/* ── CONTACT BAND ── */
+.contact-band { padding: 80px 0; background: #EDE7D8; text-align: center; }
+.contact-band h2 {
+  font-size: clamp(20px, 2.5vw, 28px); font-weight: 400; line-height: 1.9;
+  margin-bottom: 12px;
+}
+.contact-band p {
+  font-size: 14px; color: rgba(43,42,40,0.72); margin-bottom: 36px; line-height: 2.0;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px;
+}
+.btn-primary {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  background: var(--sumi); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+  border: 1px solid var(--sumi);
+}
+.btn-primary:hover { background: var(--toki); border-color: var(--toki); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 100px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(20px, 2.8vw, 30px); font-weight: 300; line-height: 1.9; margin-bottom: 14px;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.5);
+  letter-spacing: 0.18em; margin-bottom: 48px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .cta-band { padding: 80px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">HOME</a>
+    <span class="breadcrumb-sep">—</span>
+    <span>FAQ</span>
+  </div>
+  <div class="page-eyebrow">よくある質問</div>
+  <h1>ご不明な点は、<br>こちらをご覧ください。</h1>
+  <div class="page-hero-en">Frequently asked questions about staying at Tomaru Hosono.</div>
+</section>
+
+<!-- FAQ CONTENT -->
+<div style="padding: 80px 0 0;">
+  <div class="section-wrap">
+
+    <!-- Category: 宿泊について -->
+    <section class="faq-section fade-up">
+      <span class="chapter-label">— 宿泊について / About Your Stay —</span>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">スタッフは常駐していますか？</div>
+                <span class="faq-q-en">Is there staff on-site?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">Tomaru細野はスタッフ不在型の1棟貸し宿泊施設です。チェックイン・チェックアウトはすべてセルフで行っていただきます。ご不明点はチャットにてお気軽にお問い合わせください。</p>
+            <span class="faq-a-en">No. Tomaru Hosono is a self check-in property. There is no on-site staff — the house is yours for the duration of your stay. All communication is handled via chat, and we respond promptly.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">チェックインの方法を教えてください。</div>
+                <span class="faq-q-en">How do I check in?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">チェックイン1週間前に事前フォームをお送りします。到着予定時刻・交通手段・アレルギー等をご記入いただいた後、キーボックスの場所・解錠コード・駐車場・館内説明書の場所をチャットにてご案内します。</p>
+            <span class="faq-a-en">One week before check-in, we will send you a pre-arrival form. Once confirmed, we send your access instructions via chat — keybox location, unlock code, parking, and the house manual.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">定員は何名ですか？</div>
+                <span class="faq-q-en">How many guests can stay?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">最大8名です。1棟貸しのため、他のゲストとの共用はありません。グループ旅行・家族旅行・多世代旅行に最適です。</p>
+            <span class="faq-a-en">Up to 8 guests. The property is rented exclusively — no other guests share the house. Well-suited for groups, families, and multigenerational travel.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">食事は付いていますか？</div>
+                <span class="faq-q-en">Are meals included?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">宿泊料金に食事は含まれていません。細野の農家レストラン「蔵」（完全予約制）のご予約を代行することが可能です。体験パッケージには、該当する回のランチが含まれます。</p>
+            <span class="faq-a-en">Accommodation does not include meals. We can arrange a reservation at the farm restaurant "Kura" on your behalf. Experience packages include lunch where noted.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">キャンセルポリシーを教えてください。</div>
+                <span class="faq-q-en">What is the cancellation policy?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">
+              宿泊のキャンセルポリシーは、ご予約プラットフォーム（Booking.com / Vrbo）の規定に準じます。<br><br>
+              体験パッケージのキャンセルポリシー：<br>
+              ・14日以前：全額返金<br>
+              ・14日〜7日前：50%返金<br>
+              ・7日以内：返金なし
+            </p>
+            <span class="faq-a-en">Accommodation cancellation follows the policy of your booking platform (Booking.com / Vrbo).<br>Experience packages: full refund up to 14 days before; 50% refund 14–7 days before; no refund within 7 days.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">直接予約の特典はありますか？</div>
+                <span class="faq-q-en">Are there benefits for booking directly?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">自社サイトからの直接予約には、以下の特典があります：<br>・地酒一合徳利のプレゼント<br>・アーリーチェックイン（14時〜）<br>・連泊5%割引</p>
+            <span class="faq-a-en">Direct bookings via this website include: local sake on arrival, early check-in from 14:00, and a 5% discount for consecutive nights.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Category: アクセス -->
+    <section class="faq-section fade-up">
+      <span class="chapter-label">— アクセス / Getting Here —</span>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">公共交通機関でのアクセス方法を教えてください。</div>
+                <span class="faq-q-en">Can I access the property by public transport?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">最寄り駅は大石田駅（JR奥羽本線）です。東京から山形新幹線で約3時間、仙台から奥羽本線で約1.5時間。駅からTomaru細野まではタクシーで約40分です。タクシー会社については、予約時にご案内します。</p>
+            <span class="faq-a-en">The nearest station is Oishida (JR Ou Line) — approx. 3 hrs from Tokyo via Shinkansen, 1.5 hrs from Sendai. Taxi from Oishida to Tomaru Hosono is approx. 40 minutes. We provide taxi contacts at booking.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">冬季の交通手段は？積雪はありますか？</div>
+                <span class="faq-q-en">How do I get here in winter? Is there snow?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">12月〜3月は細野周辺に大雪が降ります。レンタカーをご利用の場合は、4WD・スタッドレスタイヤ装備の車両をお選びください。タクシーでのアクセスもおすすめです。交通手段については予約時に詳しくご案内します。</p>
+            <span class="faq-a-en">December through March brings significant snow. If renting a car, choose a 4WD vehicle with winter tires. Taxi is a reliable alternative. We advise on transport arrangements at booking.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">銀山温泉からはどのくらいかかりますか？</div>
+                <span class="faq-q-en">How far is it from Ginzan Onsen?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">車またはタクシーで約20分です。銀山温泉への日帰り訪問も可能で、夕方に戻ってTomaru細野の静けさを楽しむゲストも多くいらっしゃいます。</p>
+            <span class="faq-a-en">About 20 minutes by car or taxi. Many guests visit Ginzan Onsen by day and return to the quiet of Tomaru Hosono in the evening. We can advise on transport at booking.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Category: 体験パッケージ -->
+    <section class="faq-section fade-up">
+      <span class="chapter-label">— 体験パッケージ / Experiences —</span>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">体験パッケージは宿泊なしでも参加できますか？</div>
+                <span class="faq-q-en">Can I book experience packages without staying?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">体験パッケージはTomaru細野の宿泊ゲスト専用のオプションです。宿泊のご予約が必要となります。</p>
+            <span class="faq-a-en">Experiences are available to accommodation guests only. An accommodation booking is required to join any experience.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">体験の申し込みはどうすればいいですか？</div>
+                <span class="faq-q-en">How do I register for an experience?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">各体験ページのStripe Payment Linkからオンライン決済にてお申し込みください。決済完了後2〜3営業日以内に、集合場所・持ち物・当日の流れをチャットにてご案内します。</p>
+            <span class="faq-a-en">Visit the experience page and pay via the Stripe payment link. Within 2–3 business days of payment, we will send all details — meeting point, what to bring, and the day's schedule — via chat.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">英語でのサポートはありますか？</div>
+                <span class="faq-q-en">Is English support available?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">はい。すべての体験に英語でのサポートが含まれます。イベントは日本語で進行しますが、事前の連絡・申込代行・当日のご案内はTomaru細野が英語で対応します。</p>
+            <span class="faq-a-en">Yes. English support is included for all experiences. Events are conducted in Japanese, but we handle all pre-event communication, registration, and on-site guidance in English.</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle">
+            <div class="faq-q-inner">
+              <span class="faq-q-mark">Q</span>
+              <div>
+                <div class="faq-q-text">海外からの参加に必要な準備はありますか？</div>
+                <span class="faq-q-en">What should international guests prepare in advance?</span>
+              </div>
+            </div>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-a-text">各イベントには申込締切（2〜3週間前）があります。海外からのゲストの多くは3〜6ヶ月前に旅程を組まれるため、宿泊予約のタイミングでご希望のイベントをお伝えください。早めのご連絡で、確実に申込締切に間に合うようにコーディネートします。</p>
+            <span class="faq-a-en">Events have registration deadlines 2–3 weeks before the date. Since international guests often plan 3–6 months ahead, let us know your preferred events at the time of booking. We will coordinate to ensure the deadline is met.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- CONTACT BAND -->
+<section class="contact-band" style="margin-top: 60px;">
+  <div class="section-wrap" style="text-align: center;">
+    <span class="chapter-label" style="display:block; text-align:center;">— Still Have Questions? —</span>
+    <h2>解決しない場合は、チャットにてお気軽にどうぞ。</h2>
+    <p>Feel free to reach out — we typically respond within 24 hours.</p>
+    <a href="index.html#access" class="btn-primary">お問い合わせ / Contact us</a>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>ご質問が解決しましたら、<br>空室をご確認ください。</h2>
+  <span class="sub">The house is waiting. So are the mountains.</span>
+  <div class="cta-btns">
+    <a href="experiences.html" class="btn-white">体験パッケージを見る</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="area-guide.html">銀山温泉エリア</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
+    © 2026 Tomaru Hosono. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // open clicked if was closed
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Fade-up observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

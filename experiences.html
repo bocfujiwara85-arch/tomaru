@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体験パッケージ — Tomaru Hosono | Yamagata Rural Experience</title>
+<meta name="description" content="At Tomaru Hosono, we offer experience packages connecting you with Hosono's farms, mountains, and food. Mountain trekking, farm harvest, and the soba owner program.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; color: var(--kinari) !important; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  text-align: center;
+  background: linear-gradient(180deg, #F8F3E9 0%, #EDE7D8 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0 39%, rgba(43,42,40,0.018) 39% 40%, transparent 40% 100%),
+              repeating-linear-gradient(0deg, transparent 0 32%, rgba(43,42,40,0.018) 32% 33%, transparent 33% 100%);
+}
+.page-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: var(--koshoku);
+  letter-spacing: 0.38em; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.page-eyebrow::before, .page-eyebrow::after {
+  content: ''; display: block; width: 36px; height: 1px; background: var(--koshoku); opacity: 0.5;
+}
+.page-hero h1 {
+  font-size: clamp(28px, 3.8vw, 46px); font-weight: 400; line-height: 1.65;
+  color: var(--sumi); margin-bottom: 18px;
+}
+.page-hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic; color: var(--koshoku);
+  letter-spacing: 0.12em;
+}
+.breadcrumb {
+  display: flex; gap: 10px; align-items: center; justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; color: var(--koshoku); margin-bottom: 48px;
+}
+.breadcrumb a { color: var(--koshoku); text-decoration: none; }
+.breadcrumb a:hover { color: var(--toki); }
+.breadcrumb-sep { opacity: 0.5; }
+
+/* ── SECTION BASE ── */
+.section-wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; }
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px;
+}
+.body-text {
+  font-size: 15px; line-height: 2.0;
+  color: rgba(43,42,40,0.82);
+}
+
+/* ── INTRO ── */
+.intro-section { padding: 100px 0 80px; text-align: center; }
+.intro-section .section-h2 { max-width: 700px; margin: 0 auto 32px; }
+.intro-section .body-text { max-width: 580px; margin: 0 auto; }
+.intro-en {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-style: italic; color: rgba(43,42,40,0.55); letter-spacing: 0.1em;
+  margin-top: 20px; display: block;
+}
+
+/* ── PACKAGE CARDS ── */
+.packages-section { padding: 20px 0 120px; }
+.packages-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.pkg-card { position: relative; overflow: hidden; display: block; text-decoration: none; }
+.pkg-img {
+  aspect-ratio: 3/4; position: relative; overflow: hidden;
+  transition: transform 0.6s ease;
+}
+.pkg-card:hover .pkg-img { transform: scale(1.03); }
+.pkg-img-inner {
+  width: 100%; height: 100%; transition: transform 0.6s ease;
+}
+.pkg-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(43,42,40,0.78) 0%, rgba(43,42,40,0.1) 55%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px 28px;
+}
+.pkg-season {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 11px; color: rgba(243,238,229,0.65); letter-spacing: 0.3em;
+  margin-bottom: 10px;
+}
+.pkg-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.3em;
+  margin-bottom: 8px;
+}
+.pkg-name {
+  font-size: 20px; font-weight: 400; color: var(--kinari);
+  line-height: 1.5; margin-bottom: 8px; letter-spacing: 0.06em;
+}
+.pkg-catch {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 14px; color: rgba(243,238,229,0.75); letter-spacing: 0.06em;
+  margin-bottom: 18px; line-height: 1.6;
+}
+.pkg-link-label {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.2em; color: var(--kinari);
+  display: flex; align-items: center; gap: 10px;
+  border-top: 1px solid rgba(243,238,229,0.2); padding-top: 16px;
+  transition: color 0.3s;
+}
+.pkg-card:hover .pkg-link-label { color: var(--toki); }
+.pkg-link-arrow { transition: transform 0.3s; }
+.pkg-card:hover .pkg-link-arrow { transform: translateX(6px); }
+
+/* ── HOW TO BOOK ── */
+.how-section { padding: 100px 0; background: #EDE7D8; }
+.how-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; margin-top: 64px;
+  border-top: 1px solid rgba(138,122,92,0.2);
+}
+.how-step {
+  padding: 44px 40px;
+  border-right: 1px solid rgba(138,122,92,0.2);
+}
+.how-step:last-child { border-right: none; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.35em;
+  display: block; margin-bottom: 18px;
+}
+.step-title {
+  font-size: 17px; font-weight: 400; margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.step-body { font-size: 14px; line-height: 2.0; color: rgba(43,42,40,0.78); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 120px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 14px;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.18em; margin-bottom: 48px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .packages-grid { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .how-step { border-right: none; border-bottom: 1px solid rgba(138,122,92,0.2); }
+  .cta-band { padding: 80px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html" class="active">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">HOME</a>
+    <span class="breadcrumb-sep">—</span>
+    <span>EXPERIENCES</span>
+  </div>
+  <div class="page-eyebrow">Experience Packages</div>
+  <h1>細野の山と農家と食を、<br>体験する滞在へ。</h1>
+  <div class="page-hero-en">Step beyond the house. Into the land itself.</div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— About Experiences —</span>
+    <h2 class="section-h2 fade-up">宿泊とは別に、細野と繋がる<br>時間を用意しています。</h2>
+    <p class="body-text fade-up d1">
+      Tomaru細野では、古民家に泊まるだけでなく、ほその村のコミュニティが年間を通じて開催するイベントへの参加を、英語対応込みでコーディネートしています。<br><br>
+      里山のトレッキング、山菜の収穫、農家レストランでの食事、そばオーナーとして種まきから食卓まで——体験は3つのパッケージに整理しています。それぞれ、滞在と組み合わせてご参加いただけます。
+    </p>
+    <span class="intro-en fade-up d2">
+      At Tomaru Hosono, we offer optional experiences connecting you with Hosono's farms, mountains, and food.<br>
+      All coordination and English support is handled by us.
+    </span>
+  </div>
+</section>
+
+<!-- PACKAGES GRID -->
+<section class="packages-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Three Packages —</span>
+  </div>
+  <div class="packages-grid">
+
+    <!-- Package 1: Trekking -->
+    <a href="exp-trekking.html" class="pkg-card fade-up">
+      <div class="pkg-img" style="background: linear-gradient(160deg, #6B7A5E 0%, #4A5840 40%, #2B3826 100%);">
+        <div class="pkg-overlay">
+          <span class="pkg-season">April — October</span>
+          <span class="pkg-num">— 01 —</span>
+          <div class="pkg-name">里山トレッキング滞在</div>
+          <div class="pkg-catch">Step into the mountains of Hosono.</div>
+          <div class="pkg-link-label">
+            詳細を見る / See details
+            <span class="pkg-link-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Package 2: Farm -->
+    <a href="exp-farm.html" class="pkg-card fade-up d1">
+      <div class="pkg-img" style="background: linear-gradient(160deg, #B8A87A 0%, #8A7A5C 40%, #5A4E36 100%);">
+        <div class="pkg-overlay">
+          <span class="pkg-season">May — November</span>
+          <span class="pkg-num">— 02 —</span>
+          <div class="pkg-name">農家と土を触る滞在</div>
+          <div class="pkg-catch">Pick it. Eat it. That is the whole day.</div>
+          <div class="pkg-link-label">
+            詳細を見る / See details
+            <span class="pkg-link-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Package 3: Soba -->
+    <a href="exp-soba.html" class="pkg-card fade-up d2">
+      <div class="pkg-img" style="background: linear-gradient(160deg, #5A5248 0%, #3A3530 40%, #1E1D1B 100%);">
+        <div class="pkg-overlay">
+          <span class="pkg-season">July — November</span>
+          <span class="pkg-num">— 03 —</span>
+          <div class="pkg-name">そばオーナー年3回滞在</div>
+          <div class="pkg-catch">Grow your own SOBA.</div>
+          <div class="pkg-link-label">
+            詳細を見る / See details
+            <span class="pkg-link-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- HOW TO BOOK -->
+<section class="how-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— How to Join —</span>
+    <h2 class="section-h2 fade-up">予約の流れ</h2>
+  </div>
+  <div class="section-wrap">
+    <div class="how-grid">
+      <div class="how-step fade-up">
+        <span class="step-num">Step 01</span>
+        <div class="step-title">宿泊を予約する</div>
+        <p class="step-body">まずTomaru細野の宿泊を確定してください。体験パッケージは、宿泊ゲスト専用のオプションです。<br><span style="font-size:13px;opacity:0.7;font-style:italic;font-family:'Cormorant Garamond',serif;">Book your accommodation first. Experiences are available to accommodation guests only.</span></p>
+      </div>
+      <div class="how-step fade-up d1">
+        <span class="step-num">Step 02</span>
+        <div class="step-title">体験を選んで決済</div>
+        <p class="step-body">ご希望の体験ページから、Stripe Payment Linkにてオンライン決済を完了してください。チェックイン6週前（海外ゲスト）または2週前（国内）にご案内メッセージをお送りします。<br><span style="font-size:13px;opacity:0.7;font-style:italic;font-family:'Cormorant Garamond',serif;">Choose your experience and pay via the secure link on each package page.</span></p>
+      </div>
+      <div class="how-step fade-up d2">
+        <span class="step-num">Step 03</span>
+        <div class="step-title">詳細のご案内</div>
+        <p class="step-body">決済完了後2〜3営業日以内に、集合場所・持ち物・当日の流れをチャットにてご連絡します。スタッフが英語でご案内します。<br><span style="font-size:13px;opacity:0.7;font-style:italic;font-family:'Cormorant Garamond',serif;">Within 2–3 business days of payment, we will send all details — meeting point, what to bring, schedule.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>まず、宿泊を予約してください。</h2>
+  <span class="sub">The house comes first. The mountain follows.</span>
+  <div class="cta-btns">
+    <a href="events.html" class="btn-white">イベント一覧 / View all events</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="area-guide.html">銀山温泉エリア</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
+    © 2026 Tomaru Hosono. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// NAV scroll shrink
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Fade-up observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

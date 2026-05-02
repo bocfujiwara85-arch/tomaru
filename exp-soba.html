@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>そばオーナー年3回滞在 — Tomaru Hosono | Soba Owner Program Yamagata</title>
+<meta name="description" content="The Soba Owner Program at Hosono Village — three visits across July, October, and November. Sow, harvest, and make your own soba noodles in Yamagata.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 640px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #4A4540 0%, #302C28 45%, #1A1815 100%);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(26,24,21,0.6) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 39%, rgba(243,238,229,0.03) 39% 40%, transparent 40% 100%),
+    repeating-linear-gradient(0deg, transparent 0 32%, rgba(243,238,229,0.03) 32% 33%, transparent 33% 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 24px; }
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: rgba(243,238,229,0.65);
+  letter-spacing: 0.38em; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 36px; height: 1px;
+  background: rgba(243,238,229,0.4);
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 50px); font-weight: 400; line-height: 1.65;
+  color: var(--kinari); margin-bottom: 18px;
+}
+.hero-catch {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 34px); font-style: italic;
+  color: rgba(243,238,229,0.85); letter-spacing: 0.08em; margin-bottom: 16px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.12em; margin-bottom: 56px; line-height: 1.8;
+}
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px;
+  letter-spacing: 0.45em; color: rgba(243,238,229,0.5);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(243,238,229,0.5));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.6)} 50%{opacity:1;transform:scaleY(1)} }
+.breadcrumb {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; color: rgba(243,238,229,0.5); margin-bottom: 48px;
+}
+.breadcrumb a { color: rgba(243,238,229,0.5); text-decoration: none; }
+.breadcrumb-sep { margin: 0 10px; opacity: 0.5; }
+
+/* ── SECTION BASE ── */
+.section-wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; }
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px; max-width: 600px;
+}
+.body-text {
+  font-size: 15px; line-height: 2.0; max-width: 600px;
+  color: rgba(43,42,40,0.82);
+}
+
+/* ── INTRO ── */
+.body-section { padding: 100px 0 80px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.body-en {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-style: italic; line-height: 2.0; color: rgba(43,42,40,0.65);
+  letter-spacing: 0.04em;
+}
+
+/* ── TIMELINE ── */
+.timeline-section { padding: 80px 0 100px; background: var(--sumi); }
+.timeline-section .chapter-label { color: rgba(193,122,111,0.8); }
+.timeline-section .section-h2 { color: var(--kinari); }
+.timeline {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.tl-card {
+  padding: 44px 36px;
+  background: rgba(243,238,229,0.04);
+  border-top: 2px solid rgba(193,122,111,0.4);
+  position: relative;
+}
+.tl-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 56px; color: rgba(193,122,111,0.15); line-height: 1;
+  position: absolute; top: 28px; right: 28px; font-weight: 300;
+}
+.tl-month {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.35em;
+  display: block; margin-bottom: 16px;
+}
+.tl-date {
+  font-size: 22px; font-weight: 400; color: var(--kinari);
+  margin-bottom: 8px; letter-spacing: 0.06em;
+}
+.tl-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.65);
+  margin-bottom: 24px; letter-spacing: 0.08em;
+}
+.tl-body { font-size: 14px; line-height: 2.0; color: rgba(243,238,229,0.72); }
+.tl-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 24px;
+  color: rgba(193,122,111,0.4); position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%); z-index: 2;
+}
+.tl-note {
+  margin-top: 48px; padding: 32px 36px;
+  border: 1px solid rgba(243,238,229,0.1);
+  font-size: 14px; line-height: 2.0; color: rgba(243,238,229,0.65);
+}
+.tl-note em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.45); display: block; margin-top: 10px;
+}
+
+/* ── PRICING ── */
+.pricing-section { padding: 80px 0 100px; }
+.price-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+.price-table th {
+  text-align: left; padding: 14px 20px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.3em; color: var(--toki);
+  border-bottom: 1px solid rgba(138,122,92,0.3);
+}
+.price-table td {
+  padding: 20px; font-size: 14px; line-height: 1.9;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  vertical-align: top;
+}
+.price-table tr:hover td { background: rgba(138,122,92,0.04); }
+.price-amount {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  color: var(--sumi); white-space: nowrap;
+}
+.price-note-small { font-size: 13px; color: rgba(43,42,40,0.65); }
+
+/* ── BOOK CTA ── */
+.book-section { padding: 100px 0; text-align: center; background: #EDE7D8; }
+.book-inner { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+.btn-primary {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  background: var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+  border: 1px solid var(--toki);
+}
+.btn-primary:hover { background: #A5604F; border-color: #A5604F; }
+.btn-outline-dark {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--sumi); text-decoration: none;
+  border: 1px solid rgba(43,42,40,0.4); padding: 16px 36px;
+  letter-spacing: 0.22em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-outline-dark:hover { background: var(--sumi); color: var(--kinari); }
+.btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.book-note {
+  display: block; margin-top: 28px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(43,42,40,0.5); letter-spacing: 0.15em;
+}
+.visit-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.3em;
+  display: block; margin-bottom: 10px; margin-top: 28px;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 100px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(20px, 2.8vw, 30px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 14px;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.5);
+  letter-spacing: 0.18em; margin-bottom: 48px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .timeline { grid-template-columns: 1fr; }
+  .tl-arrow { display: none; }
+  .cta-band { padding: 80px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html" class="active">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="breadcrumb-sep">—</span>
+      <a href="experiences.html">EXPERIENCES</a>
+      <span class="breadcrumb-sep">—</span>
+      <span>SOBA OWNER</span>
+    </div>
+    <div class="hero-eyebrow">Package 03 — Soba Owner</div>
+    <h1>そばオーナー年3回滞在</h1>
+    <div class="hero-catch">Grow your own SOBA.</div>
+    <div class="hero-sub">Three visits. One growing season. Seed to bowl.<br>Your soba waits in Hosono — until November.</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="body-section" id="content">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— About This Package —</span>
+    <div class="two-col">
+      <div>
+        <h2 class="section-h2 fade-up">自分のそばを、<br>種から育てる。</h2>
+        <p class="body-text fade-up d1">
+          7月、細野の畑に種をまく。<br><br>
+          10月、里芋とナメコキノコを収穫する。11月、秋になった畑で育ったそばを自分で打つ。<br><br>
+          そばオーナープログラムは、3回の訪問で構成されている。7月・10月・11月——それぞれに役割がある。種をまいた人間だけが、11月の新そばを自分の手で打てる。<br><br>
+          「自分のそば」というのは比喩ではない。区画登録したそば畑のそばを収穫し、2kgの粉として持ち帰る。Tomaru細野を拠点に、ほその村の農業の一年に関わる滞在。
+        </p>
+      </div>
+      <div class="fade-up d2">
+        <p class="body-en">
+          In July, you sow the seeds in Hosono's fields.<br><br>
+          In October, you harvest taro and nameko mushrooms. In November, the soba you planted has grown, and you roll the noodles yourself.<br><br>
+          The Soba Owner Program runs across three visits — July, October, November. Each visit has its purpose. Only those who sowed in July can make noodles in November.<br><br>
+          "Your own soba" is not metaphorical. You register a plot, follow it through the season, and take home 2kg of freshly milled flour. Many participants return for consecutive years. Hosono becomes a place they come back to.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Three Visits, One Story —</span>
+    <h2 class="section-h2 fade-up">種まきから食卓まで、<br>3回の旅で完結する。</h2>
+    <div class="timeline fade-up d1">
+      <div class="tl-card" style="position: relative;">
+        <span class="tl-num">01</span>
+        <span class="tl-month">July 26 (Sun)</span>
+        <div class="tl-date">第1回</div>
+        <div class="tl-title">Soba seeding + blueberry picking</div>
+        <p class="tl-body">
+          そばの種まき体験とブルーベリー摘み取り。あなたのそばの物語が始まる日。<br><br>
+          <em style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(243,238,229,0.55);">This is the day your soba begins. Sow the seeds. Pick blueberries. Come back in October.</em>
+        </p>
+      </div>
+      <div class="tl-card" style="position: relative;">
+        <span class="tl-num">02</span>
+        <span class="tl-month">October 4 (Sun)</span>
+        <div class="tl-date">第2回</div>
+        <div class="tl-title">Taro & nameko mushroom harvest</div>
+        <p class="tl-body">
+          里芋とナメコキノコの収穫。紅葉が始まる時期の細野。<br><br>
+          <em style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(243,238,229,0.55);">Autumn in Hosono. The fields are full. Harvest what grew while you were away.</em>
+        </p>
+      </div>
+      <div class="tl-card" style="position: relative;">
+        <span class="tl-num">03</span>
+        <span class="tl-month">November 8 (Sun)</span>
+        <div class="tl-date">第3回</div>
+        <div class="tl-title">Soba noodle making + New Soba Festival</div>
+        <p class="tl-body">
+          そば打ち体験と新そば祭。7月にまいた種が、食卓に戻ってくる。<br><br>
+          <em style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(243,238,229,0.55);">The seeds you sowed in July become the noodles you eat in November. That is the whole story.</em>
+        </p>
+      </div>
+    </div>
+    <div class="tl-note fade-up d2">
+      ランチはすべての回に含まれます。申込締切は7月10日（第1回と同時に全3回を登録）。<br>
+      <em>Lunch is included at all three visits. Registration deadline: July 10. All three visits are registered together at the time of first booking.</em>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Pricing —</span>
+    <h2 class="section-h2 fade-up">料金</h2>
+    <table class="price-table fade-up d1">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>内容</th>
+          <th>Amount</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>区画登録料<br><span class="price-note-small">Plot registration</span></td>
+          <td><span class="price-note-small">そば畑1区画の登録。収穫時に2kgのそば粉がもらえる。<br><em>One soba field plot. Includes 2kg soba flour at harvest.</em></span></td>
+          <td><span class="price-amount">¥5,000</span><br><span class="price-note-small">/ 区画 (one-time)</span></td>
+          <td><span class="price-note-small">宿泊予約時に申込</span></td>
+        </tr>
+        <tr>
+          <td>第1回参加費<br><span class="price-note-small">Visit 1 – July 26</span></td>
+          <td><span class="price-note-small">種まき＋ブルーベリー摘み。ランチ込み。<br><em>Soba seeding + blueberry picking. Lunch included.</em></span></td>
+          <td><span class="price-amount">¥3,000</span><br><span class="price-note-small">/ 人</span></td>
+          <td><span class="price-note-small">申込締切 7月10日</span></td>
+        </tr>
+        <tr>
+          <td>第2回参加費<br><span class="price-note-small">Visit 2 – Oct 4</span></td>
+          <td><span class="price-note-small">里芋・ナメコ収穫。ランチ込み。<br><em>Taro and nameko mushroom harvest. Lunch included.</em></span></td>
+          <td><span class="price-amount">¥3,000</span><br><span class="price-note-small">/ 人</span></td>
+          <td><span class="price-note-small">第1回と同時申込</span></td>
+        </tr>
+        <tr>
+          <td>第3回参加費<br><span class="price-note-small">Visit 3 – Nov 8</span></td>
+          <td><span class="price-note-small">そば打ち体験＋新そば祭。ランチ込み。<br><em>Soba noodle making + New Soba Festival. Lunch included.</em></span></td>
+          <td><span class="price-amount">¥3,000</span><br><span class="price-note-small">/ 人</span></td>
+          <td><span class="price-note-small">第1回と同時申込</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 20px; font-size: 13px; color: rgba(43,42,40,0.6); font-family:'Noto Sans JP',sans-serif; font-weight:300; letter-spacing:0.1em;">
+      ※ 宿泊料金は別途。3回とも宿泊を伴う場合、合計6泊以上のご利用で連泊割引が適用されます。<br>
+      Accommodation is separate. Consecutive-night discount (5%) applies for direct bookings.
+    </p>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section class="book-section">
+  <div class="book-inner">
+    <span class="chapter-label" style="text-align:center; display:block;">— Book This Experience —</span>
+    <h2 class="section-h2" style="max-width:700px; margin: 0 auto 20px; text-align:center;">
+      そばオーナーに登録する<br>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-style:italic;color:var(--koshoku);font-weight:300;">Register as a Soba Owner</span>
+    </h2>
+    <p class="body-text" style="text-align:center; margin: 0 auto 20px; max-width:560px;">
+      下記リンクより各回の参加費をお申し込みください。第1回（7月26日）の申込と同時に、第2回・第3回も合わせてご登録をお願いします。
+    </p>
+    <p class="body-text" style="text-align:center; margin: 0 auto 32px; max-width:560px; font-style:italic; font-family:'Cormorant Garamond',serif; font-size:15px; color:rgba(43,42,40,0.6);">
+      Register for Visit 1 first. We will coordinate Visits 2 and 3 at the same time — all three visits are registered together.
+    </p>
+
+    <span class="visit-label">— Visit 1 — July 26</span>
+    <div class="btn-row" style="margin-top:0;">
+      <!-- NOTE: Stripe Payment Link — replace href after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/SOBA_VISIT1_PLACEHOLDER" class="btn-primary" target="_blank" rel="noopener">
+        第1回（7/26 種まき）を申し込む
+      </a>
+    </div>
+
+    <span class="visit-label">— Visit 2 — October 4</span>
+    <div class="btn-row" style="margin-top:0;">
+      <!-- NOTE: Stripe Payment Link — replace href after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/SOBA_VISIT2_PLACEHOLDER" class="btn-outline-dark" target="_blank" rel="noopener">
+        第2回（10/4 収穫）を申し込む
+      </a>
+    </div>
+
+    <span class="visit-label">— Visit 3 — November 8</span>
+    <div class="btn-row" style="margin-top:0;">
+      <!-- NOTE: Stripe Payment Link — replace href after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/SOBA_VISIT3_PLACEHOLDER" class="btn-outline-dark" target="_blank" rel="noopener">
+        第3回（11/8 そば打ち）を申し込む
+      </a>
+    </div>
+
+    <span class="book-note">
+      参加には宿泊のご予約が必要です — Accommodation booking required. Deadline: July 10.
+    </span>
+  </div>
+</section>
+
+<!-- STAY CTA -->
+<section class="cta-band">
+  <h2>種をまく前に、泊まる場所を確保してください。</h2>
+  <span class="sub">Your soba is already waiting in Hosono. The house should be too.</span>
+  <div class="cta-btns">
+    <a href="experiences.html" class="btn-white">← 体験パッケージ一覧</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="exp-trekking.html">里山トレッキング滞在</a>
+    <a href="exp-farm.html">農家と土を触る滞在</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
+    © 2026 Tomaru Hosono. All rights reserved.
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

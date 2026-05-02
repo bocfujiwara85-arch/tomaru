@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>農家と土を触る滞在 — Tomaru Hosono | Farm & Harvest Yamagata</title>
+<meta name="description" content="Warabi fern foraging and farm restaurant experience in Hosono, Yamagata. Pick wild mountain vegetables yourself. Dine at the farm restaurant Kura.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 640px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #C4A96A 0%, #8A7A5C 45%, #4A3E2A 100%);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(43,38,26,0.55) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 39%, rgba(243,238,229,0.025) 39% 40%, transparent 40% 100%),
+    repeating-linear-gradient(0deg, transparent 0 32%, rgba(243,238,229,0.025) 32% 33%, transparent 33% 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 24px; }
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 13px; color: rgba(243,238,229,0.65);
+  letter-spacing: 0.38em; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 36px; height: 1px;
+  background: rgba(243,238,229,0.4);
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 50px); font-weight: 400; line-height: 1.65;
+  color: var(--kinari); margin-bottom: 18px;
+}
+.hero-catch {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.8vw, 28px); font-style: italic;
+  color: rgba(243,238,229,0.85); letter-spacing: 0.08em; margin-bottom: 16px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.12em; margin-bottom: 56px; line-height: 1.8;
+}
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px;
+  letter-spacing: 0.45em; color: rgba(243,238,229,0.5);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(243,238,229,0.5));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.6)} 50%{opacity:1;transform:scaleY(1)} }
+
+/* ── SECTION BASE ── */
+.section-wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; }
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px; max-width: 600px;
+}
+.body-text {
+  font-size: 15px; line-height: 2.0; max-width: 600px;
+  color: rgba(43,42,40,0.82);
+}
+.breadcrumb {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; color: rgba(243,238,229,0.5); margin-bottom: 48px;
+}
+.breadcrumb a { color: rgba(243,238,229,0.5); text-decoration: none; }
+.breadcrumb-sep { margin: 0 10px; opacity: 0.5; }
+
+/* ── TWO COL ── */
+.body-section { padding: 100px 0 80px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.body-en {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-style: italic; line-height: 2.0; color: rgba(43,42,40,0.65);
+  letter-spacing: 0.04em;
+}
+
+/* ── EXPERIENCE CARDS ── */
+.exp-cards-section { padding: 80px 0 100px; background: #EDE7D8; }
+.exp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 56px; }
+.exp-card { padding: 44px 40px; background: var(--kinari); border-top: 2px solid var(--toki); }
+.exp-card-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; color: var(--toki); letter-spacing: 0.3em;
+  display: block; margin-bottom: 16px;
+}
+.exp-card-title { font-size: 20px; font-weight: 400; margin-bottom: 16px; letter-spacing: 0.06em; }
+.exp-card-body { font-size: 14px; line-height: 2.0; color: rgba(43,42,40,0.78); margin-bottom: 24px; }
+.exp-card-detail { font-size: 13px; color: var(--koshoku); line-height: 2.0; }
+.exp-card-price {
+  font-family: 'Cormorant Garamond', serif; font-size: 28px;
+  color: var(--sumi); margin-top: 20px;
+}
+
+/* ── WARABI DATES ── */
+.dates-section { padding: 80px 0 100px; }
+.dates-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; margin-top: 48px;
+}
+.date-item {
+  padding: 20px 16px; text-align: center;
+  border: 1px solid rgba(138,122,92,0.15);
+  font-family: 'Cormorant Garamond', serif; font-size: 15px;
+  color: var(--sumi); letter-spacing: 0.06em; line-height: 1.5;
+}
+.date-item:hover { background: var(--kinari-dark); }
+.date-month {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 10px;
+  font-weight: 300; letter-spacing: 0.2em; color: var(--toki);
+  display: block; margin-bottom: 4px;
+}
+
+/* ── BOOK CTA ── */
+.book-section { padding: 100px 0; text-align: center; }
+.book-section .section-h2 { max-width: 700px; margin: 0 auto 20px; }
+.btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  background: var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+  border: 1px solid var(--toki);
+}
+.btn-primary:hover { background: #A5604F; border-color: #A5604F; }
+.btn-outline {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--sumi); text-decoration: none;
+  border: 1px solid rgba(43,42,40,0.5); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-outline:hover { background: var(--sumi); color: var(--kinari); }
+.book-note {
+  display: block; margin-top: 28px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(43,42,40,0.5); letter-spacing: 0.15em;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 100px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(20px, 2.8vw, 30px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 14px;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.5);
+  letter-spacing: 0.18em; margin-bottom: 48px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 44px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .exp-cards { grid-template-columns: 1fr; }
+  .dates-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-band { padding: 80px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="experiences.html" class="active">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="breadcrumb-sep">—</span>
+      <a href="experiences.html">EXPERIENCES</a>
+      <span class="breadcrumb-sep">—</span>
+      <span>FARM & HARVEST</span>
+    </div>
+    <div class="hero-eyebrow">Package 02 — Farm & Harvest</div>
+    <h1>農家と土を触る滞在</h1>
+    <div class="hero-catch">Pick it. Eat it. That is the whole day.</div>
+    <div class="hero-sub">What Hosono's farmers grow, you harvest here.<br>Use your hands, and the place starts to make sense.</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="body-section" id="content">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— About This Package —</span>
+    <div class="two-col">
+      <div>
+        <h2 class="section-h2 fade-up">摘んで、食べる。<br>それだけで、一日が満ちる。</h2>
+        <p class="body-text fade-up d1">
+          5月の早朝。ワラビ畑へ向かう。<br><br>
+          細野の観光農園で収穫するワラビは、そのまま持ち帰れる。都市部では「希少な山菜」として売られているものが、ここでは朝の作業だ。土の感触と、山の匂い。<br><br>
+          昼には、農家レストラン「蔵」へ。細野産の旬の食材と、打ちたてのそば。この土地が育てたものを、この土地で食べる。<br><br>
+          夕方、Tomaru細野に戻る。その繰り返しが、細野の農家の時間に入り込む感覚を生む。
+        </p>
+      </div>
+      <div class="fade-up d2">
+        <p class="body-en">
+          Early morning in May. Head to the warabi field.<br><br>
+          The bracken fern you pick goes home with you. In cities, this is sold as something rare. Here, it is the morning's work. Soil on your hands. The smell of the mountain.<br><br>
+          At Kura, the farm restaurant, a country meal waits — seasonal vegetables and freshly made buckwheat noodles, all from Hosono. What the land grew, the land serves.<br><br>
+          Back at Tomaru Hosono in the evening. That rhythm — field, table, house — is how the place enters you.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE CARDS -->
+<section class="exp-cards-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Experiences Included —</span>
+    <h2 class="section-h2 fade-up">2つの農家体験</h2>
+    <div class="exp-cards">
+      <div class="exp-card fade-up d1">
+        <span class="exp-card-label">Farm Experience A</span>
+        <div class="exp-card-title">ワラビ収穫体験</div>
+        <p class="exp-card-body">
+          農家レストラン「蔵」が運営する観光農園で、ワラビを収穫。収穫したワラビはお持ち帰りいただけます。収穫後、別途予約で農家レストランでのランチも可能。
+        </p>
+        <p class="exp-card-body" style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:14px;">
+          Guided warabi fern foraging at the tourist field. Harvested ferns are yours to take home. Lunch at the farm restaurant available for an additional fee (advance reservation required).
+        </p>
+        <div class="exp-card-detail">
+          📅 2026年 5/13, 5/15, 5/17, 5/20, 5/22, 5/24, 5/27, 5/29<br>
+          &#x2003;&#x2003; 6/3, 6/5, 6/7, 6/10, 6/12, 6/14, 6/17, 6/21, 6/24<br>
+          🕘 8:50集合 → 11:00解散<br>
+          📍 農家レストラン「蔵」集合 / Meet at Farm Restaurant "Kura"<br>
+          ⚠️ 3日前までの予約が必要 / Reserve 3 days in advance
+        </div>
+        <div class="exp-card-price">¥2,000 <span style="font-size:16px;">/ 人</span></div>
+      </div>
+      <div class="exp-card fade-up d2">
+        <span class="exp-card-label">Farm Experience B</span>
+        <div class="exp-card-title">農家レストラン「蔵」でのランチ</div>
+        <p class="exp-card-body">
+          細野の農家が育てた旬の食材と打ちたてのそば。完全予約制の農家レストランで、この土地の味と向き合う昼の時間。
+        </p>
+        <p class="exp-card-body" style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:14px;">
+          Seasonal ingredients and freshly made soba at the farm restaurant "Kura". A traditional country meal prepared in a working farmhouse. Reservation required — no walk-ins.
+        </p>
+        <div class="exp-card-detail">
+          📅 通年（年中）/ Year-round<br>
+          🕐 11:30 – 14:00<br>
+          📍 農家レストラン「蔵」/ Farm Restaurant "Kura", Hosono<br>
+          ⚠️ 完全予約制 / Reservation required (fully reservation-based)
+        </div>
+        <div class="exp-card-price">¥2,000 <span style="font-size:16px;">/ 人</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WARABI DATES -->
+<section class="dates-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Warabi Season Dates —</span>
+    <h2 class="section-h2 fade-up">2026年 ワラビ収穫実施日程</h2>
+    <p class="body-text fade-up d1">ワラビ収穫は短い季節の中の体験です。5月〜6月下旬のみ。予約は各日の3日前まで。<br><em style="font-family:'Cormorant Garamond',serif;">Warabi season is brief — May through late June only. Reserve at least 3 days before your chosen date.</em></p>
+    <div class="dates-grid fade-up d2">
+      <div class="date-item"><span class="date-month">MAY</span>13 (Wed)</div>
+      <div class="date-item"><span class="date-month">MAY</span>15 (Fri)</div>
+      <div class="date-item"><span class="date-month">MAY</span>17 (Sun)</div>
+      <div class="date-item"><span class="date-month">MAY</span>20 (Wed)</div>
+      <div class="date-item"><span class="date-month">MAY</span>22 (Fri)</div>
+      <div class="date-item"><span class="date-month">MAY</span>24 (Sun)</div>
+      <div class="date-item"><span class="date-month">MAY</span>27 (Wed)</div>
+      <div class="date-item"><span class="date-month">MAY</span>29 (Fri)</div>
+      <div class="date-item"><span class="date-month">JUN</span>3 (Wed)</div>
+      <div class="date-item"><span class="date-month">JUN</span>5 (Fri)</div>
+      <div class="date-item"><span class="date-month">JUN</span>7 (Sun)</div>
+      <div class="date-item"><span class="date-month">JUN</span>10 (Wed)</div>
+      <div class="date-item"><span class="date-month">JUN</span>12 (Fri)</div>
+      <div class="date-item"><span class="date-month">JUN</span>14 (Sun)</div>
+      <div class="date-item"><span class="date-month">JUN</span>17 (Wed)</div>
+      <div class="date-item"><span class="date-month">JUN</span>21 (Sun)</div>
+      <div class="date-item"><span class="date-month">JUN</span>24 (Wed)</div>
+      <div class="date-item" style="background:rgba(193,122,111,0.06); color:var(--koshoku); font-size:12px; font-family:'Noto Sans JP',sans-serif; font-weight:300;">
+        <span class="date-month" style="color:var(--koshoku);">LAST DATE</span>Jun 24
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section class="book-section">
+  <div class="section-wrap">
+    <span class="chapter-label">— Book This Experience —</span>
+    <h2 class="section-h2" style="max-width: 700px; margin: 0 auto 20px; text-align: center;">
+      体験を予約する<br>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-style:italic;color:var(--koshoku);font-weight:300;">Book this experience</span>
+    </h2>
+    <p class="body-text" style="text-align: center; margin: 0 auto 40px; max-width: 560px;">
+      下記リンクよりオンライン決済をお願いします。決済完了後2〜3営業日以内に、集合場所・持ち物・当日の流れをお伝えします。
+    </p>
+    <div class="btn-row" style="margin-bottom: 16px;">
+      <!-- NOTE: Stripe Payment Link — replace href after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/FARM_HARVEST_PLACEHOLDER" class="btn-primary" target="_blank" rel="noopener">
+        農家収穫体験（ワラビ）を予約
+      </a>
+    </div>
+    <div class="btn-row">
+      <!-- NOTE: Stripe Payment Link — replace href after activating payment methods in Stripe Dashboard -->
+      <a href="https://buy.stripe.com/FARM_RESTAURANT_PLACEHOLDER" class="btn-outline" target="_blank" rel="noopener">
+        農家レストラン「蔵」を予約
+      </a>
+    </div>
+    <span class="book-note">
+      参加には宿泊のご予約が必要です — Accommodation booking required to join.
+    </span>
+  </div>
+</section>
+
+<!-- STAY CTA -->
+<section class="cta-band">
+  <h2>摘んで、食べる。まず、泊まる場所を。</h2>
+  <span class="sub">The field comes first. The table follows.</span>
+  <div class="cta-btns">
+    <a href="experiences.html" class="btn-white">← 体験パッケージ一覧</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="exp-trekking.html">里山トレッキング滞在</a>
+    <a href="exp-soba.html">そばオーナー年3回滞在</a>
+    <a href="events.html">イベント</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
+    © 2026 Tomaru Hosono. All rights reserved.
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
