@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>部屋と設え — Tomaru細野</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sumi: #2B2A28;
+  --kinari: #F3EEE5;
+  --koshoku: #8A7A5C;
+  --kokeiro: #5C6A4E;
+  --toki: #C17A6F;
+  --kinari-dark: #E8E0D2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--kinari);
+  color: var(--sumi);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 56px;
+  background: rgba(243,238,229,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(138,122,92,0.12);
+  transition: padding 0.4s ease, box-shadow 0.4s ease;
+}
+.nav.scrolled { padding: 16px 56px; box-shadow: 0 1px 24px rgba(43,42,40,0.06); }
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; letter-spacing: 0.22em;
+  color: var(--sumi); text-decoration: none; display: block;
+}
+.brand small {
+  display: block; font-size: 9px; letter-spacing: 0.45em;
+  color: var(--koshoku); margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--sumi); text-decoration: none; font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  letter-spacing: 0.18em; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--toki); }
+.nav-links a.active { color: var(--toki); }
+.nav-book {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari) !important; background: var(--sumi);
+  padding: 10px 24px; letter-spacing: 0.22em;
+  transition: background 0.3s !important;
+}
+.nav-book:hover { background: var(--toki) !important; color: var(--kinari) !important; }
+
+/* ── HERO ── */
+.page-hero {
+  padding-top: 120px; padding-bottom: 80px;
+  text-align: center; background: var(--kinari);
+}
+.page-hero .eyebrow {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki); letter-spacing: 0.35em;
+  display: block; margin-bottom: 28px;
+}
+.page-hero h1 {
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; line-height: 1.65;
+  color: var(--sumi); margin-bottom: 20px;
+}
+.page-hero .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 16px; color: var(--koshoku); letter-spacing: 0.12em;
+}
+
+/* ── SECTION BASE ── */
+.section-wrap {
+  max-width: 1000px; margin: 0 auto; padding: 0 56px;
+}
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--toki);
+  letter-spacing: 0.35em; display: block; margin-bottom: 28px;
+}
+.section-h2 {
+  font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7;
+  margin-bottom: 40px; max-width: 580px;
+}
+
+/* ── ROOM FEATURES ── */
+.rooms-section { padding: 80px 0; background: #EDE7D8; }
+.room-feature {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 520px; margin-top: 2px;
+}
+.room-feature--rev .room-feature__img { order: 2; }
+.room-feature--rev .room-feature__body { order: 1; }
+.room-feature__img {
+  background: linear-gradient(160deg, #D8CCB5 0%, #BBA882 50%, #8A7A5C 100%);
+  background-size: cover; background-position: center;
+}
+.room-feature__body {
+  padding: 72px 64px; background: var(--kinari);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.room-feature__label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.35em; color: var(--toki);
+  display: block; margin-bottom: 12px;
+}
+.room-feature__title {
+  font-size: clamp(28px, 3vw, 40px); font-weight: 400;
+  color: var(--sumi); margin-bottom: 20px; letter-spacing: 0.1em;
+}
+.room-feature__desc {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: 14px; line-height: 2; color: var(--koshoku);
+  margin-bottom: 32px; max-width: 360px;
+}
+.room-feature__list {
+  list-style: none; padding: 0; margin: 0;
+  border-top: 1px solid rgba(138,122,92,0.2); padding-top: 20px;
+}
+.room-feature__list li {
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--sumi);
+  padding: 7px 0; border-bottom: 1px solid rgba(138,122,92,0.12);
+  letter-spacing: 0.04em;
+}
+.room-feature__list li::before { content: '— '; color: var(--koshoku); font-size: 10px; }
+
+/* ── AMENITIES ── */
+.amenities-section {
+  padding: 100px 0; background: var(--kinari);
+}
+.amenities-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 40px; margin-top: 56px;
+}
+.amenity-group h4 {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: var(--toki); letter-spacing: 0.25em;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 1px solid rgba(193,122,111,0.25);
+}
+.amenity-group ul {
+  list-style: none; padding: 0;
+}
+.amenity-group ul li {
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--sumi);
+  padding: 6px 0; border-bottom: 1px solid rgba(138,122,92,0.1);
+  letter-spacing: 0.04em;
+}
+.amenity-group ul li::before { content: '— '; color: var(--koshoku); font-size: 10px; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--sumi); color: var(--kinari);
+  padding: 120px 56px; text-align: center;
+}
+.cta-band h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 300; line-height: 1.9;
+  margin-bottom: 16px; max-width: 640px; margin-left: auto; margin-right: auto;
+}
+.cta-band .sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; color: rgba(243,238,229,0.55);
+  letter-spacing: 0.18em; margin-bottom: 52px; display: block;
+}
+.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none;
+  border: 1px solid rgba(243,238,229,0.5); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-white:hover { background: rgba(243,238,229,0.1); }
+.btn-toki {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  color: var(--kinari); text-decoration: none; background: var(--toki);
+  border: 1px solid var(--toki); padding: 18px 48px;
+  letter-spacing: 0.28em; transition: all 0.4s ease; display: inline-block;
+}
+.btn-toki:hover { background: #A5604F; border-color: #A5604F; }
+.cta-note {
+  display: block; margin-top: 32px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: rgba(138,122,92,0.7); letter-spacing: 0.18em;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 72px 56px 52px; text-align: center;
+  background: #1E1D1B; color: rgba(243,238,229,0.45);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; letter-spacing: 0.25em; color: rgba(243,238,229,0.7);
+  display: block; margin-bottom: 24px;
+}
+.footer-links {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; color: rgba(243,238,229,0.4); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--toki); }
+.footer-info {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.15em; line-height: 2.2;
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; }
+.fade-up.d2 { transition-delay: 0.22s; }
+.fade-up.d3 { transition-delay: 0.34s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 24px; }
+  .room-feature { grid-template-columns: 1fr; }
+  .room-feature--rev .room-feature__img { order: 0; }
+  .room-feature--rev .room-feature__body { order: 1; }
+  .room-feature__img { min-height: 260px; }
+  .room-feature__body { padding: 48px 28px; }
+  .amenities-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 480px) {
+  .amenities-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cta-band { padding: 100px 24px; }
+  footer { padding: 56px 24px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
+  <div class="nav-links">
+    <a href="index.html">ホーム</a>
+    <a href="rooms.html" class="active">宿について</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="area-guide.html">周辺ガイド</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <span class="eyebrow">— Rooms &amp; Amenities —</span>
+  <h1>部屋と、暮らしの備え。</h1>
+  <p class="sub">Every room holds a different silence.</p>
+</section>
+
+<!-- ROOMS -->
+<section class="rooms-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Living Space —</span>
+  </div>
+
+  <div class="room-feature fade-up" style="margin-top: 32px;">
+    <div class="room-feature__img" style="background-image: url('images/room-living.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Living Space</span>
+      <h2 class="room-feature__title">居室</h2>
+      <p class="room-feature__desc">百年の梁が見守る広間。囲炉裏の名残と縁側の光が交わる、この家の中心。</p>
+      <ul class="room-feature__list">
+        <li>座卓・座布団</li>
+        <li>灯油ストーブ（冬季）</li>
+        <li>冷暖房（エアコン）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature room-feature--rev fade-up">
+    <div class="room-feature__img" style="background-image: url('images/room1.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Bedroom 01 — The Beam Room</span>
+      <h2 class="room-feature__title">梁の間</h2>
+      <p class="room-feature__desc">百年の梁が頭上を渡る。この家でもっとも古い記憶を持つ部屋。</p>
+      <ul class="room-feature__list">
+        <li>布団一式（シーツ・枕・掛け布団）</li>
+        <li>収納スペース</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature fade-up">
+    <div class="room-feature__img" style="background-image: url('images/room2.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Bedroom 02 — The Veranda Room</span>
+      <h2 class="room-feature__title">縁の間</h2>
+      <p class="room-feature__desc">縁側に面した、光の多い部屋。朝、障子を開けると庭の空気が入ってくる。</p>
+      <ul class="room-feature__list">
+        <li>布団一式（シーツ・枕・掛け布団）</li>
+        <li>収納スペース</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature room-feature--rev fade-up">
+    <div class="room-feature__img" style="background-image: url('images/room3.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Bedroom 03 — The Indigo Room</span>
+      <h2 class="room-feature__title">藍の間</h2>
+      <p class="room-feature__desc">藍染めの布が差し色になる、静かな部屋。夜ふけの静けさが深い。</p>
+      <ul class="room-feature__list">
+        <li>布団一式（シーツ・枕・掛け布団）</li>
+        <li>収納スペース</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature fade-up">
+    <div class="room-feature__img" style="background-image: url('images/room4.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Bedroom 04 — The Mountain Room</span>
+      <h2 class="room-feature__title">山の間</h2>
+      <p class="room-feature__desc">山側の窓から尾花沢の山並みが見える。四季の移ろいを感じる部屋。</p>
+      <ul class="room-feature__list">
+        <li>布団一式（シーツ・枕・掛け布団）</li>
+        <li>収納スペース</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature fade-up">
+    <div class="room-feature__img" style="background-image: url('images/kitchen.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Kitchen</span>
+      <h2 class="room-feature__title">台所</h2>
+      <p class="room-feature__desc">農家暮らしそのままの台所。採れたての野菜を持ち込んで、自分で料理を。</p>
+      <ul class="room-feature__list">
+        <li>IHコンロ（2口）</li>
+        <li>冷蔵庫・電子レンジ・炊飯器</li>
+        <li>食器・調理器具一式</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature room-feature--rev fade-up">
+    <div class="room-feature__img" style="background-image: url('images/dressroom.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Washroom</span>
+      <h2 class="room-feature__title">洗面室</h2>
+      <p class="room-feature__desc">バスルームとは独立した洗面室。脱衣・身支度の空間として、ゆったりと使える。</p>
+      <ul class="room-feature__list">
+        <li>洗面台・鏡</li>
+        <li>バスタオル・フェイスタオル</li>
+        <li>ドライヤー</li>
+        <li>洗濯機</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="room-feature fade-up">
+    <div class="room-feature__img" style="background-image: url('images/room-bath.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="room-feature__body">
+      <span class="room-feature__label">Bathroom</span>
+      <h2 class="room-feature__title">バスルーム</h2>
+      <p class="room-feature__desc">追い焚き付きの浴槽。山歩きの後は、静かに湯に浸かる夜を。</p>
+      <ul class="room-feature__list">
+        <li>シャワー</li>
+        <li>シャンプー・コンディショナー・ボディソープ</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Amenities —</span>
+    <h2 class="section-h2 fade-up">全館設備一覧</h2>
+    <div class="amenities-grid">
+      <div class="amenity-group fade-up d1">
+        <h4>Kitchen / 台所</h4>
+        <ul>
+          <li>IHコンロ（2口）</li>
+          <li>冷蔵庫</li>
+          <li>電子レンジ</li>
+          <li>炊飯器</li>
+          <li>食器・調理器具一式</li>
+        </ul>
+      </div>
+      <div class="amenity-group fade-up d2">
+        <h4>Washroom / 洗面室</h4>
+        <ul>
+          <li>洗面台・鏡</li>
+          <li>バスタオル・フェイスタオル</li>
+          <li>ドライヤー</li>
+          <li>洗濯機</li>
+        </ul>
+      </div>
+      <div class="amenity-group fade-up d3">
+        <h4>Bathroom / 浴室</h4>
+        <ul>
+          <li>シャワー</li>
+          <li>シャンプー・コンディショナー</li>
+          <li>ボディソープ</li>
+        </ul>
+      </div>
+      <div class="amenity-group fade-up d3">
+        <h4>General / 共通</h4>
+        <ul>
+          <li>冷暖房（エアコン）</li>
+          <li>灯油ストーブ（冬季）</li>
+          <li>布団一式 × 8</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>この家に、泊まってみませんか。</h2>
+  <span class="sub">— Reserve your quiet —</span>
+  <div class="cta-btns">
+    <a href="experiences.html" class="btn-white">体験パッケージを見る</a>
+    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">今すぐ予約する</a>
+  </div>
+  <span class="cta-note">— 銀山温泉まで車20分 · 1棟貸し · 最大8名 —</span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">TOMARU HOSONO — 細野</span>
+  <div class="footer-links">
+    <a href="index.html#about">宿のご紹介</a>
+    <a href="rooms.html">部屋と設え</a>
+    <a href="experiences.html">体験パッケージ</a>
+    <a href="events.html">イベント</a>
+    <a href="area-guide.html">銀山温泉エリア</a>
+    <a href="index.html#access">アクセス</a>
+    <a href="faq.html">よくある質問</a>
+  </div>
+  <div class="footer-info">
+    山形県尾花沢市細野552<br>
+    info@tomaru-hosono.jp<br>
+    <br>
+    &copy; 2026 Tomaru細野. All rights reserved.
+  </div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  var fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(function (el) { io.observe(el); });
+  } else {
+    fadeEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>
