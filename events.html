@@ -8,12 +8,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sumi: #2B2A28;
-  --kinari: #F3EEE5;
-  --koshoku: #8A7A5C;
-  --kokeiro: #5C6A4E;
-  --toki: #C17A6F;
+  --sumi:        #2B2A28;
+  --kinari:      #F3EEE5;
+  --koshoku:     #8A7A5C;
+  --kokeiro:     #5C6A4E;
+  --toki:        #C17A6F;
   --kinari-dark: #E8E0D2;
+  --matsuri:     #5B6C8A;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -124,9 +125,9 @@ body {
 .intro-section .section-h2 { max-width: 680px; margin: 0 auto 28px; }
 .intro-section .body-text { max-width: 580px; margin: 0 auto; }
 .intro-note {
-  margin-top: 32px; padding: 28px 36px;
+  margin-top: 36px; padding: 28px 36px;
   border: 1px solid rgba(138,122,92,0.2);
-  max-width: 680px; margin-left: auto; margin-right: auto; margin-top: 36px;
+  max-width: 680px; margin-left: auto; margin-right: auto;
   font-size: 14px; line-height: 2.0; color: rgba(43,42,40,0.72);
   text-align: left;
 }
@@ -135,87 +136,251 @@ body {
   color: var(--toki); font-size: 15px; font-weight: 400;
 }
 
-/* ── SEASON TABS ── */
-.season-nav {
-  display: flex; gap: 0; justify-content: center;
+/* ── FEATURED SECTION ── */
+.featured-section {
+  padding: 80px 0 60px;
+  background: #EDE7D8;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.featured-card {
+  background: var(--kinari);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; color: inherit; display: block;
+}
+.featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(43,42,40,0.10);
+}
+.featured-visual {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+}
+.featured-visual img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.featured-season-tag {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(43,42,40,0.65);
+  color: var(--kinari);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px; font-weight: 300; letter-spacing: 0.22em;
+  padding: 5px 12px;
+}
+.featured-cat-tag {
+  position: absolute; bottom: 14px; left: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 9px; font-weight: 300; letter-spacing: 0.18em;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.88);
+}
+.featured-card-body { padding: 24px 24px 28px; }
+.featured-date-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 14px; color: var(--toki); letter-spacing: 0.15em;
+  display: block; margin-bottom: 10px;
+}
+.featured-title {
+  font-size: 17px; font-weight: 400; line-height: 1.6; margin-bottom: 4px;
+}
+.featured-title-en {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 13px; color: var(--koshoku); letter-spacing: 0.04em;
+  display: block; margin-bottom: 12px;
+}
+.featured-desc {
+  font-size: 13px; line-height: 1.9; color: rgba(43,42,40,0.70);
+  margin-bottom: 16px;
+}
+.featured-fee {
+  display: flex; align-items: baseline; gap: 8px;
+  border-top: 1px solid rgba(138,122,92,0.15);
+  padding-top: 14px;
+}
+.featured-fee-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; color: var(--sumi);
+}
+.featured-fee-note { font-size: 12px; color: var(--koshoku); }
+
+/* ── CATEGORY FILTER ── */
+.filter-wrap { padding: 60px 0 0; }
+.cat-filter {
+  display: flex; flex-wrap: wrap; gap: 0;
   border-bottom: 1px solid rgba(138,122,92,0.2);
-  margin-bottom: 0; flex-wrap: wrap;
+  margin-bottom: 0;
 }
-.season-btn {
+.cat-btn {
+  display: flex; align-items: center; gap: 7px;
   font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.18em; padding: 13px 22px;
+  background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  color: var(--koshoku); transition: all 0.3s;
+}
+.cat-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.cat-btn:hover { color: var(--sumi); }
+.cat-btn[data-cat="all"]      .cat-dot { background: var(--sumi); }
+.cat-btn[data-cat="trekking"] .cat-dot { background: var(--kokeiro); }
+.cat-btn[data-cat="farm"]     .cat-dot { background: var(--koshoku); }
+.cat-btn[data-cat="soba"]     .cat-dot { background: var(--toki); }
+.cat-btn[data-cat="matsuri"]  .cat-dot { background: var(--matsuri); }
+.cat-btn[data-cat="all"].active      { color: var(--sumi);     border-bottom-color: var(--sumi); }
+.cat-btn[data-cat="trekking"].active { color: var(--kokeiro);  border-bottom-color: var(--kokeiro); }
+.cat-btn[data-cat="farm"].active     { color: var(--koshoku);  border-bottom-color: var(--koshoku); }
+.cat-btn[data-cat="soba"].active     { color: var(--toki);     border-bottom-color: var(--toki); }
+.cat-btn[data-cat="matsuri"].active  { color: var(--matsuri);  border-bottom-color: var(--matsuri); }
+
+/* ── TIMELINE ── */
+.timeline-section { padding: 40px 0 120px; }
+.timeline-group {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0;
+  transition: opacity 0.3s ease;
+}
+.timeline-group.hidden { display: none; }
+.timeline-month-col {
+  padding-top: 32px;
+  padding-right: 0;
+  position: relative;
+}
+.timeline-month-col::after {
+  content: '';
+  position: absolute; top: 0; right: 20px;
+  width: 1px; height: 100%;
+  background: rgba(138,122,92,0.18);
+}
+.t-month-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 40px; color: rgba(138,122,92,0.16);
+  line-height: 1; font-weight: 300; display: block;
+}
+.t-month-name {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 9px; font-weight: 300;
   letter-spacing: 0.2em; color: var(--koshoku);
-  padding: 14px 28px; background: none; border: none; cursor: pointer;
-  border-bottom: 2px solid transparent; transition: all 0.3s;
-  margin-bottom: -1px;
+  display: block; margin-top: 6px;
 }
-.season-btn:hover { color: var(--toki); }
-.season-btn.active { color: var(--toki); border-bottom-color: var(--toki); }
-
-/* ── EVENT LIST ── */
-.events-section { padding: 60px 0 120px; }
-.event-group { margin-bottom: 60px; }
-.month-header {
-  display: flex; align-items: center; gap: 20px;
-  margin-bottom: 28px; padding-bottom: 16px;
-  border-bottom: 1px solid rgba(138,122,92,0.18);
-}
-.month-num {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 40px; color: rgba(138,122,92,0.18); line-height: 1; font-weight: 300;
-}
-.month-label {
-  font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 300;
-  letter-spacing: 0.25em; color: var(--toki);
+.timeline-events-col {
+  padding: 20px 0 32px 36px;
+  display: flex; flex-direction: column; gap: 10px;
 }
 
-.event-card {
-  display: grid; grid-template-columns: 140px 1fr auto;
-  gap: 0; margin-bottom: 2px;
+/* Timeline card */
+.t-card {
+  background: var(--kinari);
   border: 1px solid rgba(138,122,92,0.12);
-  transition: border-color 0.3s, background 0.3s;
+  border-left: 3px solid rgba(138,122,92,0.3);
+  padding: 18px 20px;
+  transition: border-left-color 0.3s, background 0.3s, box-shadow 0.3s;
+  display: none;
 }
-.event-card:hover { background: rgba(138,122,92,0.04); border-color: rgba(138,122,92,0.25); }
-.event-date-col {
-  padding: 24px 20px;
-  border-right: 1px solid rgba(138,122,92,0.12);
-  display: flex; flex-direction: column; justify-content: center;
+.t-card.visible { display: block; }
+.t-card:hover {
+  background: rgba(138,122,92,0.03);
+  box-shadow: 0 4px 20px rgba(43,42,40,0.06);
 }
-.event-date-main {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 18px; color: var(--toki); line-height: 1.2; margin-bottom: 4px;
+.t-card[data-cat="trekking"] { border-left-color: var(--kokeiro); }
+.t-card[data-cat="farm"]     { border-left-color: var(--koshoku); }
+.t-card[data-cat="soba"]     { border-left-color: var(--toki); }
+.t-card[data-cat="matsuri"]  { border-left-color: var(--matsuri); }
+
+.t-card-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: 16px; margin-bottom: 10px;
 }
-.event-date-deadline {
+.t-card-main {}
+.t-cat-badge {
+  display: inline-flex; align-items: center; gap: 5px;
   font-family: 'Noto Sans JP', sans-serif; font-size: 10px; font-weight: 300;
-  color: var(--koshoku); letter-spacing: 0.15em;
+  letter-spacing: 0.15em; padding: 3px 9px; border: 1px solid;
+  margin-bottom: 8px;
 }
-.event-body-col { padding: 24px 28px; }
-.event-title { font-size: 16px; font-weight: 400; margin-bottom: 6px; letter-spacing: 0.06em; }
-.event-title-en {
+.t-cat-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.t-card[data-cat="trekking"] .t-cat-badge { color: var(--kokeiro); border-color: rgba(92,106,78,0.35); }
+.t-card[data-cat="trekking"] .t-cat-dot   { background: var(--kokeiro); }
+.t-card[data-cat="farm"]     .t-cat-badge { color: var(--koshoku);  border-color: rgba(138,122,92,0.35); }
+.t-card[data-cat="farm"]     .t-cat-dot   { background: var(--koshoku); }
+.t-card[data-cat="soba"]     .t-cat-badge { color: var(--toki);     border-color: rgba(193,122,111,0.35); }
+.t-card[data-cat="soba"]     .t-cat-dot   { background: var(--toki); }
+.t-card[data-cat="matsuri"]  .t-cat-badge { color: var(--matsuri);  border-color: rgba(91,108,138,0.35); }
+.t-card[data-cat="matsuri"]  .t-cat-dot   { background: var(--matsuri); }
+
+.t-event-title {
+  font-size: 15px; font-weight: 400;
+  letter-spacing: 0.05em; line-height: 1.5; margin-bottom: 3px;
+}
+.t-event-title-en {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 13px; color: var(--koshoku); letter-spacing: 0.06em; margin-bottom: 10px;
+  font-size: 13px; color: var(--koshoku); letter-spacing: 0.04em;
 }
-.event-desc { font-size: 13px; line-height: 1.9; color: rgba(43,42,40,0.72); max-width: 520px; }
-.event-meta {
-  font-size: 12px; color: var(--koshoku); margin-top: 8px;
+.t-fee { text-align: right; flex-shrink: 0; }
+.t-fee-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; color: var(--sumi);
+  display: block; white-space: nowrap;
+}
+.t-fee-note {
+  font-size: 11px; color: var(--koshoku);
+  display: block; text-align: right;
+}
+.t-meta {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 300;
+  color: rgba(43,42,40,0.58); letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.t-desc {
+  font-size: 13px; line-height: 1.9; color: rgba(43,42,40,0.70);
+  margin-bottom: 6px;
+}
+.t-deadline {
+  font-size: 11px; color: var(--toki);
   font-family: 'Noto Sans JP', sans-serif; font-weight: 300; letter-spacing: 0.08em;
 }
-.event-right-col {
-  padding: 24px 20px;
-  border-left: 1px solid rgba(138,122,92,0.12);
-  display: flex; flex-direction: column; justify-content: center; align-items: flex-end;
-  min-width: 120px;
+
+/* ── CALENDAR SECTION ── */
+.calendar-section { padding: 80px 0; background: var(--kinari-dark); }
+.calendar-embed-wrap {
+  margin-top: 48px;
+  border: 1px solid rgba(138,122,92,0.18);
+  overflow: hidden;
+  background: var(--kinari);
 }
-.event-fee {
-  font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--sumi);
-  text-align: right; white-space: nowrap;
+/* Google Calendar iframe が入ったら .calendar-placeholder を削除してください */
+.calendar-placeholder {
+  height: 500px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
 }
-.event-fee-note { font-size: 11px; color: var(--koshoku); text-align: right; }
-.event-pkg-badge {
-  display: inline-block; margin-top: 8px;
-  font-family: 'Noto Sans JP', sans-serif; font-size: 10px; font-weight: 300;
-  letter-spacing: 0.12em; padding: 4px 10px;
-  border: 1px solid rgba(193,122,111,0.3); color: var(--toki);
+.calendar-placeholder-icon {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 52px; color: rgba(138,122,92,0.22); line-height: 1;
 }
+.calendar-placeholder-text {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 300;
+  letter-spacing: 0.2em; color: rgba(138,122,92,0.55);
+}
+.calendar-note {
+  margin-top: 20px; padding: 18px 28px;
+  border: 1px solid rgba(138,122,92,0.18);
+  font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 300;
+  line-height: 2.0; color: rgba(43,42,40,0.65);
+}
+.calendar-note a {
+  color: var(--toki); text-decoration: none;
+}
+.calendar-note a:hover { text-decoration: underline; }
 
 /* ── INBOUND NOTE ── */
 .inbound-section { padding: 60px 0 80px; background: #EDE7D8; }
@@ -305,9 +470,14 @@ footer {
   .nav.scrolled { padding: 14px 24px; }
   .nav-links { display: none; }
   .section-wrap { padding: 0 20px; }
-  .event-card { grid-template-columns: 1fr; }
-  .event-date-col { border-right: none; border-bottom: 1px solid rgba(138,122,92,0.12); }
-  .event-right-col { border-left: none; border-top: 1px solid rgba(138,122,92,0.12); align-items: flex-start; }
+  .featured-grid { grid-template-columns: 1fr; gap: 16px; }
+  .cat-btn { padding: 11px 14px; font-size: 10px; }
+  .timeline-group { grid-template-columns: 52px 1fr; }
+  .timeline-month-col::after { right: 14px; }
+  .timeline-events-col { padding-left: 20px; }
+  .t-card-header { flex-direction: column; gap: 8px; }
+  .t-fee { text-align: left; }
+  .t-fee-note { text-align: left; }
   .inbound-grid { grid-template-columns: 1fr; }
   .cta-band { padding: 80px 24px; }
   footer { padding: 56px 24px 40px; }
@@ -358,276 +528,435 @@ footer {
   </div>
 </section>
 
-<!-- EVENTS LIST -->
-<section class="events-section">
+<!-- FEATURED: 今シーズンのピックアップ -->
+<section class="featured-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Seasonal Highlights —</span>
+    <h2 class="section-h2 fade-up">今シーズンのおすすめ</h2>
+
+    <div class="featured-grid">
+
+      <!-- 特集1: 山開き（春） -->
+      <a class="featured-card fade-up" href="#month-05">
+        <div class="featured-visual" style="background: linear-gradient(145deg, #C4D5B2 0%, #8FAF76 50%, #6A9058 100%);">
+          <span class="featured-season-tag">SPRING — 春</span>
+          <span class="featured-cat-tag">登山 / Trekking</span>
+        </div>
+        <div class="featured-card-body">
+          <span class="featured-date-label">May 31, 2026</span>
+          <div class="featured-title">山開き・山菜採りツアー</div>
+          <span class="featured-title-en">Mountain Opening & Wild Vegetable Foraging Tour</span>
+          <p class="featured-desc">
+            山の神様に感謝を捧げる伝統の山開き。泰平山登山（Aコース）か、山菜採りガイドツアー（Bコース）を選べます。11:30より山の幸の朝市も開催。
+          </p>
+          <div class="featured-fee">
+            <span class="featured-fee-main">¥3,500</span>
+            <span class="featured-fee-note">交通・保険込み / 各先着40名</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 特集2: そばオーナー（夏） -->
+      <a class="featured-card fade-up d1" href="#month-07">
+        <div class="featured-visual" style="background: linear-gradient(145deg, #D6C88A 0%, #B4A556 50%, #8F8240 100%);">
+          <span class="featured-season-tag">SUMMER — 夏</span>
+          <span class="featured-cat-tag">そばオーナー / Soba Owner</span>
+        </div>
+        <div class="featured-card-body">
+          <span class="featured-date-label">Jul 26, 2026</span>
+          <div class="featured-title">そばオーナー 第1回：種まき</div>
+          <span class="featured-title-en">Soba Owner Visit 1 — Sowing + Blueberry Picking</span>
+          <p class="featured-desc">
+            細野のそば畑に自分の区画を持ち、種をまく。ブルーベリー摘み取り体験も。7月に始まり、11月の新そばで完結する、3回連続の物語。
+          </p>
+          <div class="featured-fee">
+            <span class="featured-fee-main">¥4,000</span>
+            <span class="featured-fee-note">＋区画料 ¥5,000 / ランチ込み</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 特集3: 新そば祭り（秋） -->
+      <a class="featured-card fade-up" href="#month-10">
+        <div class="featured-visual" style="background: linear-gradient(145deg, #D4A882 0%, #B8724A 50%, #9A5835 100%);">
+          <span class="featured-season-tag">AUTUMN — 秋</span>
+          <span class="featured-cat-tag">お祭り / Festival</span>
+        </div>
+        <div class="featured-card-body">
+          <span class="featured-date-label">Oct 25, 2026</span>
+          <div class="featured-title">新そば祭り・秋の収穫祭</div>
+          <span class="featured-title-en">New Soba & Autumn Harvest Festival</span>
+          <p class="featured-desc">
+            細野産の新そばと、旬のきのこ・秋野菜が並ぶ収穫の祭り。今年の大地が育てたものを、村の人々と一緒に祝う一日。
+          </p>
+          <div class="featured-fee">
+            <span class="featured-fee-main">¥3,500</span>
+            <span class="featured-fee-note">昼食込み</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 特集4: 冬の銀山・雪の細野（冬） -->
+      <a class="featured-card fade-up d1" href="#month-02">
+        <div class="featured-visual" style="background: linear-gradient(145deg, #D8E4F0 0%, #A0B8D0 50%, #6E90B0 100%);">
+          <span class="featured-season-tag">WINTER — 冬</span>
+          <span class="featured-cat-tag">雪あそび・銀山温泉 / Snow & Onsen</span>
+        </div>
+        <div class="featured-card-body">
+          <span class="featured-date-label">December — February</span>
+          <div class="featured-title">冬の銀山・雪の細野</div>
+          <span class="featured-title-en">Winter Ginzan & Snow Days in Hosono</span>
+          <p class="featured-desc">
+            細野は12月下旬から2月にかけて深い雪に包まれます。車で20分の銀山温泉は、雪吊りの温泉街と夜の灯籠が幻想的な季節。2月には雪の中での山菜採り・雪滑り体験も開催。
+          </p>
+          <div class="featured-fee">
+            <span class="featured-fee-main">宿泊プランで体験</span>
+            <span class="featured-fee-note">雪遊び体験は別途 / Feb event</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FILTER + TIMELINE -->
+<section class="timeline-section">
   <div class="section-wrap">
 
-    <!-- SPRING -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">02</span>
-        <span class="month-label">FEBRUARY — 冬</span>
+    <!-- カテゴリフィルター -->
+    <div class="filter-wrap fade-up">
+      <span class="chapter-label">— All Events —</span>
+      <h2 class="section-h2">イベント年間カレンダー</h2>
+      <div class="cat-filter" role="tablist" aria-label="カテゴリで絞り込む">
+        <button class="cat-btn active" data-cat="all" role="tab" aria-selected="true">
+          <span class="cat-dot"></span>すべて / All
+        </button>
+        <button class="cat-btn" data-cat="trekking" role="tab" aria-selected="false">
+          <span class="cat-dot"></span>登山・トレッキング
+        </button>
+        <button class="cat-btn" data-cat="farm" role="tab" aria-selected="false">
+          <span class="cat-dot"></span>農業・収穫
+        </button>
+        <button class="cat-btn" data-cat="soba" role="tab" aria-selected="false">
+          <span class="cat-dot"></span>そばオーナー
+        </button>
+        <button class="cat-btn" data-cat="matsuri" role="tab" aria-selected="false">
+          <span class="cat-dot"></span>地域まつり
+        </button>
       </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Feb 22</div>
-          <div class="event-date-deadline">締切 2/13</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">冬の山菜取りと雪遊び</div>
-          <div class="event-title-en">Winter Foraging & Snow Slide Play</div>
-          <p class="event-desc">雪の中での山菜採り体験＋昔ながらの雪滑り遊び。カエデの樹液テイスティング付き。<br>Foraging in the snow, traditional snow slide play. Maple sap tasting included.</p>
-          <div class="event-meta">🕐 10:00–14:00　📍 細野 / Hosono</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">昼食費<br>+保険</div>
-          <div class="event-fee-note">詳細はお問い合わせ</div>
+    </div>
+
+    <!-- 2月 -->
+    <div class="timeline-group fade-up" id="month-02" data-month="02">
+      <div class="timeline-month-col">
+        <span class="t-month-num">02</span>
+        <span class="t-month-name">FEBRUARY<br>冬</span>
+      </div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">冬の山菜取りと雪遊び</div>
+              <div class="t-event-title-en">Winter Foraging & Snow Slide Play</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">昼食費<br>+保険</span>
+              <span class="t-fee-note">詳細はお問い合わせ</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Feb 22　🕐 10:00–14:00　📍 細野 / Hosono　締切 2/13</div>
+          <p class="t-desc">雪の中での山菜採り体験＋昔ながらの雪滑り遊び。カエデの樹液テイスティング付き。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Foraging in the snow, traditional snow slide play. Maple sap tasting included.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- APRIL -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">04</span>
-        <span class="month-label">APRIL — 春</span>
+    <!-- 4月 -->
+    <div class="timeline-group fade-up" id="month-04" data-month="04">
+      <div class="timeline-month-col">
+        <span class="t-month-num">04</span>
+        <span class="t-month-name">APRIL<br>春</span>
       </div>
-      <div class="event-card" style="margin-bottom:2px;">
-        <div class="event-date-col">
-          <div class="event-date-main">Apr 12</div>
-          <div class="event-date-deadline">締切 4/3</div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">御堂森イワウチワトレッキング</div>
+              <div class="t-event-title-en">Mt. Odohsan Iwauchiwa Wildflower Trekking</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥2,000</span>
+              <span class="t-fee-note">+昼食 / lunch<br>先着50名</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Apr 12　🕐 8:00–16:00　締切 4/3</div>
+          <p class="t-desc">標高600m以上の斜面に群生するイワウチワを鑑賞しながらのトレッキング。残雪あり。先着50名。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Trek through vast colonies of Iwauchiwa wildflowers. Residual snow likely. First 50.</em></p>
         </div>
-        <div class="event-body-col">
-          <div class="event-title">御堂森イワウチワトレッキング</div>
-          <div class="event-title-en">Mt. Odohsan Iwauchiwa Wildflower Trekking</div>
-          <p class="event-desc">標高600m以上の斜面に群生するイワウチワを鑑賞しながらのトレッキング。残雪あり。先着50名。<br>Trek through vast colonies of Iwauchiwa wildflowers. Residual snow likely. First 50.</p>
-          <div class="event-meta">🕐 8:00–16:00　👥 先着50名</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥2,000</div>
-          <div class="event-fee-note">+昼食 / lunch</div>
-          <span class="event-pkg-badge">TREKKING PKG</span>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Apr 26</div>
-          <div class="event-date-deadline">締切 4/17</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">早春御堂森登山（1,057m）</div>
-          <div class="event-title-en">Early Spring Mt. Odohsan Ascent</div>
-          <p class="event-desc">山頂1,057mへの本格登山。イワウチワ観賞ルート。先着50名。<br>Summit climb to 1,057m with wildflower viewing along the route. First 50.</p>
-          <div class="event-meta">🕐 8:00–16:00　👥 先着50名</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥2,000</div>
-          <div class="event-fee-note">+昼食 / lunch</div>
-          <span class="event-pkg-badge">TREKKING PKG</span>
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">早春御堂森登山（1,057m）</div>
+              <div class="t-event-title-en">Early Spring Mt. Odohsan Ascent</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥2,000</span>
+              <span class="t-fee-note">+昼食 / lunch<br>先着50名</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Apr 26　🕐 8:00–16:00　締切 4/17</div>
+          <p class="t-desc">山頂1,057mへの本格登山。イワウチワ観賞ルート。先着50名。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Summit climb to 1,057m with wildflower viewing along the route. First 50.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- MAY -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">05</span>
-        <span class="month-label">MAY — 春〜初夏</span>
+    <!-- 5月 -->
+    <div class="timeline-group fade-up" id="month-05" data-month="05">
+      <div class="timeline-month-col">
+        <span class="t-month-num">05</span>
+        <span class="t-month-name">MAY<br>春〜初夏</span>
       </div>
-      <div class="event-card" style="margin-bottom:2px;">
-        <div class="event-date-col">
-          <div class="event-date-main">May 13<br>〜 Jun 24</div>
-          <div class="event-date-deadline">各3日前まで</div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="farm">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>農業・収穫</span>
+              <div class="t-event-title">ワラビ収穫体験（観光農園）</div>
+              <div class="t-event-title-en">Warabi Fern Foraging at the Tourist Field</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥2,000</span>
+              <span class="t-fee-note">持ち帰り込み</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 May 13〜Jun 24（全17日間）　🕐 8:50〜11:00　📍 農家レストラン「蔵」集合　各3日前まで</div>
+          <p class="t-desc">農家レストラン「蔵」の観光農園でワラビ収穫。収穫物はお持ち帰り可。5/13〜6/24の計17日間開催。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Guided bracken fern foraging. Harvested ferns are yours to take home. 17 dates across May–June.</em></p>
         </div>
-        <div class="event-body-col">
-          <div class="event-title">ワラビ収穫体験（観光農園）</div>
-          <div class="event-title-en">Warabi Fern Foraging at the Tourist Field</div>
-          <p class="event-desc">農家レストラン「蔵」の観光農園でワラビ収穫。収穫物はお持ち帰り可。5/13〜6/24の計17日間開催。<br>Guided bracken fern foraging. Harvested ferns are yours to take home. 17 dates across May–June.</p>
-          <div class="event-meta">🕐 8:50〜11:00　📍 農家レストラン「蔵」集合</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥2,000</div>
-          <div class="event-fee-note">持ち帰り込み</div>
-          <span class="event-pkg-badge">FARM PKG</span>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">May 31</div>
-          <div class="event-date-deadline">締切 5/22</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">山開き・山菜採りツアー</div>
-          <div class="event-title-en">Mountain Opening & Wild Vegetable Foraging Tour</div>
-          <p class="event-desc">Aコース（泰平山登山）またはBコース（山菜採りガイドツアー）を選択。11:30から山の幸の朝市あり。各先着40名。<br>Course A (ascent) or Course B (foraging). Fresh vegetable market from 11:30. First 40 per course.</p>
-          <div class="event-meta">🕐 7:30–15:00　👥 各先着40名</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,500</div>
-          <div class="event-fee-note">交通・保険込み</div>
-          <span class="event-pkg-badge">TREKKING PKG</span>
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">山開き・山菜採りツアー</div>
+              <div class="t-event-title-en">Mountain Opening & Wild Vegetable Foraging Tour</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥3,500</span>
+              <span class="t-fee-note">交通・保険込み<br>各先着40名</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 May 31　🕐 7:30–15:00　締切 5/22</div>
+          <p class="t-desc">Aコース（泰平山登山）またはBコース（山菜採りガイドツアー）を選択。11:30から山の幸の朝市あり。各先着40名。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Course A (ascent) or Course B (foraging). Fresh vegetable market from 11:30. First 40 per course.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- JUNE -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">06</span>
-        <span class="month-label">JUNE — 初夏</span>
+    <!-- 6月 -->
+    <div class="timeline-group fade-up" id="month-06" data-month="06">
+      <div class="timeline-month-col">
+        <span class="t-month-num">06</span>
+        <span class="t-month-name">JUNE<br>初夏</span>
       </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Jun 14</div>
-          <div class="event-date-deadline">締切 6/5</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">御堂森縦走路登山（難易度 4B）</div>
-          <div class="event-title-en">Mt. Odohsan Ridge Traverse — Grade 4B</div>
-          <p class="event-desc">尾花沢・東根の2市をまたぐ全縦走コース。中〜上級者向け。先着30名。<br>Full ridge traverse spanning two cities. Intermediate–advanced. First 30 participants.</p>
-          <div class="event-meta">🕐 6:00–16:30　👥 先着30名　⚠️ 中〜上級者向け</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,000</div>
-          <div class="event-fee-note">+昼食・交通・保険</div>
-          <span class="event-pkg-badge">TREKKING PKG</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- JULY -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">07</span>
-        <span class="month-label">JULY — 夏</span>
-      </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Jul 26</div>
-          <div class="event-date-deadline">締切 7/10</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">そばオーナー 第1回：種まき＋ブルーベリー摘み</div>
-          <div class="event-title-en">Soba Owner Visit 1 — Sowing + Blueberry Picking</div>
-          <p class="event-desc">そば畑の区画を登録し、自分のそばの種をまく。ブルーベリー摘み取りも。11月の新そばまでの物語が始まる。<br>Register your plot, sow your own soba seeds, pick blueberries. The three-visit story begins here.</p>
-          <div class="event-meta">📍 細野 / Hosono　🍱 ランチ込み</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,000</div>
-          <div class="event-fee-note">+区画料 ¥5,000</div>
-          <span class="event-pkg-badge">SOBA PKG</span>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">御堂森縦走路登山（難易度 4B）</div>
+              <div class="t-event-title-en">Mt. Odohsan Ridge Traverse — Grade 4B</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥3,000</span>
+              <span class="t-fee-note">+昼食・交通・保険<br>先着30名</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Jun 14　🕐 6:00–16:30　⚠️ 中〜上級者向け　締切 6/5</div>
+          <p class="t-desc">尾花沢・東根の2市をまたぐ全縦走コース。中〜上級者向け。先着30名。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Full ridge traverse spanning two cities. Intermediate–advanced. First 30 participants.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- OCTOBER -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">10</span>
-        <span class="month-label">OCTOBER — 秋</span>
+    <!-- 7月 -->
+    <div class="timeline-group fade-up" id="month-07" data-month="07">
+      <div class="timeline-month-col">
+        <span class="t-month-num">07</span>
+        <span class="t-month-name">JULY<br>夏</span>
       </div>
-      <div class="event-card" style="margin-bottom:2px;">
-        <div class="event-date-col">
-          <div class="event-date-main">Oct 4</div>
-          <div class="event-date-deadline">7/10と同時申込</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">そばオーナー 第2回：里芋・ナメコ収穫</div>
-          <div class="event-title-en">Soba Owner Visit 2 — Taro & Nameko Mushroom Harvest</div>
-          <p class="event-desc">紅葉の始まる細野で、里芋とナメコキノコの収穫。ランチ込み。<br>Harvest taro and nameko mushrooms as autumn begins. Lunch included.</p>
-          <div class="event-meta">📍 細野 / Hosono　🍱 ランチ込み</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,000</div>
-          <div class="event-fee-note">/ 人</div>
-          <span class="event-pkg-badge">SOBA PKG</span>
-        </div>
-      </div>
-      <div class="event-card" style="margin-bottom:2px;">
-        <div class="event-date-col">
-          <div class="event-date-main">Oct 11</div>
-          <div class="event-date-deadline">締切 10/2</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">秋の御堂森縦走</div>
-          <div class="event-title-en">Odohsan Long Ridge Traverse — Autumn Foliage</div>
-          <p class="event-desc">6月と同じ縦走コースが、紅葉に染まる秋に変わる。先着30名。<br>The June ridgeline, now covered in autumn colour. First 30 participants.</p>
-          <div class="event-meta">🕐 6:30–16:30　👥 先着30名</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥2,000</div>
-          <div class="event-fee-note">+昼食・保険</div>
-          <span class="event-pkg-badge">TREKKING PKG</span>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Oct 25</div>
-          <div class="event-date-deadline">締切 10/16</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">新そば祭り・秋の収穫祭</div>
-          <div class="event-title-en">New Soba & Autumn Harvest Festival</div>
-          <p class="event-desc">細野産の新そばと旬のきのこ・秋野菜。今年の大地が育てたものを祝う一日。<br>Hosono's new-harvest soba, seasonal mushrooms, and autumn produce. A celebration of the year's harvest.</p>
-          <div class="event-meta">🍱 昼食・参加費込み</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,500</div>
-          <div class="event-fee-note">昼食込み</div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="soba">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>そばオーナー</span>
+              <div class="t-event-title">そばオーナー 第1回：種まき＋ブルーベリー摘み</div>
+              <div class="t-event-title-en">Soba Owner Visit 1 — Sowing + Blueberry Picking</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥4,000</span>
+              <span class="t-fee-note">+区画料 ¥5,000<br>ランチ込み</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Jul 26　📍 細野 / Hosono　締切 7/10</div>
+          <p class="t-desc">そば畑の区画を登録し、自分のそばの種をまく。ブルーベリー摘み取りも。11月の新そばまでの物語が始まる。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Register your plot, sow your own soba seeds, pick blueberries. The three-visit story begins here.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- NOVEMBER -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">11</span>
-        <span class="month-label">NOVEMBER — 晩秋</span>
+    <!-- 10月 -->
+    <div class="timeline-group fade-up" id="month-10" data-month="10">
+      <div class="timeline-month-col">
+        <span class="t-month-num">10</span>
+        <span class="t-month-name">OCTOBER<br>秋</span>
       </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main">Nov 8</div>
-          <div class="event-date-deadline">7/10と同時申込</div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="soba">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>そばオーナー</span>
+              <div class="t-event-title">そばオーナー 第2回：里芋・ナメコ収穫</div>
+              <div class="t-event-title-en">Soba Owner Visit 2 — Taro & Nameko Mushroom Harvest</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥4,000</span>
+              <span class="t-fee-note">/ 人　ランチ込み</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Oct 4　📍 細野 / Hosono　※ 7/10と同時申込</div>
+          <p class="t-desc">紅葉の始まる細野で、里芋とナメコキノコの収穫。ランチ込み。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Harvest taro and nameko mushrooms as autumn begins. Lunch included.</em></p>
         </div>
-        <div class="event-body-col">
-          <div class="event-title">そばオーナー 第3回：そば打ち＋新そば祭</div>
-          <div class="event-title-en">Soba Owner Visit 3 — Noodle Making + New Soba Festival</div>
-          <p class="event-desc">7月に種をまいたそばを、自分で打つ。2kgのそば粉をお持ち帰り。そばオーナーの物語が完結する。<br>The seeds you sowed in July become noodles you roll yourself. Take home 2kg of freshly milled flour.</p>
-          <div class="event-meta">📍 細野 / Hosono　🍱 ランチ込み</div>
+        <div class="t-card visible" data-cat="trekking">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>登山・トレッキング</span>
+              <div class="t-event-title">秋の御堂森縦走</div>
+              <div class="t-event-title-en">Odohsan Long Ridge Traverse — Autumn Foliage</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥2,000</span>
+              <span class="t-fee-note">+昼食・保険<br>先着30名</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Oct 11　🕐 6:30–16:30　締切 10/2</div>
+          <p class="t-desc">6月と同じ縦走コースが、紅葉に染まる秋に変わる。先着30名。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">The June ridgeline, now covered in autumn colour. First 30 participants.</em></p>
         </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥3,000</div>
-          <div class="event-fee-note">/ 人</div>
-          <span class="event-pkg-badge">SOBA PKG</span>
+        <div class="t-card visible" data-cat="matsuri">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>地域まつり</span>
+              <div class="t-event-title">新そば祭り・秋の収穫祭</div>
+              <div class="t-event-title-en">New Soba & Autumn Harvest Festival</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥3,500</span>
+              <span class="t-fee-note">昼食込み</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Oct 25　🍱 昼食・参加費込み</div>
+          <p class="t-desc">細野産の新そばと旬のきのこ・秋野菜。今年の大地が育てたものを祝う一日。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Hosono's new-harvest soba, seasonal mushrooms, and autumn produce. A celebration of the year's harvest.</em></p>
         </div>
       </div>
     </div>
 
-    <!-- YEAR ROUND -->
-    <div class="event-group fade-up">
-      <div class="month-header">
-        <span class="month-num">—</span>
-        <span class="month-label">YEAR-ROUND — 通年</span>
+    <!-- 11月 -->
+    <div class="timeline-group fade-up" id="month-11" data-month="11">
+      <div class="timeline-month-col">
+        <span class="t-month-num">11</span>
+        <span class="t-month-name">NOVEMBER<br>晩秋</span>
       </div>
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-date-main" style="font-size:14px;">通年</div>
-          <div class="event-date-deadline">要事前予約</div>
-        </div>
-        <div class="event-body-col">
-          <div class="event-title">農家レストラン「蔵」ランチ</div>
-          <div class="event-title-en">Farm Restaurant "Kura" — Lunch</div>
-          <p class="event-desc">旬の野菜と打ちたてのそば。細野の農家が運営する完全予約制の農家レストラン。<br>Seasonal vegetables and freshly made soba. Fully reservation-based; no walk-ins.</p>
-          <div class="event-meta">🕐 11:30–14:00　📍 農家レストラン「蔵」</div>
-        </div>
-        <div class="event-right-col">
-          <div class="event-fee">¥2,000</div>
-          <div class="event-fee-note">/ 人</div>
-          <span class="event-pkg-badge">FARM PKG</span>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="soba">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>そばオーナー</span>
+              <div class="t-event-title">そばオーナー 第3回：そば打ち＋新そば祭</div>
+              <div class="t-event-title-en">Soba Owner Visit 3 — Noodle Making + New Soba Festival</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥4,000</span>
+              <span class="t-fee-note">/ 人　ランチ込み</span>
+            </div>
+          </div>
+          <div class="t-meta">📅 Nov 8　📍 細野 / Hosono　※ 7/10と同時申込</div>
+          <p class="t-desc">7月に種をまいたそばを、自分で打つ。2kgのそば粉をお持ち帰り。そばオーナーの物語が完結する。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">The seeds you sowed in July become noodles you roll yourself. Take home 2kg of freshly milled flour.</em></p>
         </div>
       </div>
     </div>
 
+    <!-- 通年 -->
+    <div class="timeline-group fade-up" id="month-all" data-month="all">
+      <div class="timeline-month-col">
+        <span class="t-month-num" style="font-size:24px;opacity:0.25;">通<br>年</span>
+        <span class="t-month-name">YEAR-ROUND</span>
+      </div>
+      <div class="timeline-events-col">
+        <div class="t-card visible" data-cat="farm">
+          <div class="t-card-header">
+            <div class="t-card-main">
+              <span class="t-cat-badge"><span class="t-cat-dot"></span>農業・収穫</span>
+              <div class="t-event-title">農家レストラン「蔵」ランチ</div>
+              <div class="t-event-title-en">Farm Restaurant "Kura" — Lunch</div>
+            </div>
+            <div class="t-fee">
+              <span class="t-fee-main">¥2,000</span>
+              <span class="t-fee-note">/ 人　要予約</span>
+            </div>
+          </div>
+          <div class="t-meta">🕐 11:30–14:00　📍 農家レストラン「蔵」　要事前予約</div>
+          <p class="t-desc">旬の野菜と打ちたてのそば。細野の農家が運営する完全予約制の農家レストラン。<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(43,42,40,0.55);">Seasonal vegetables and freshly made soba. Fully reservation-based; no walk-ins.</em></p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /section-wrap -->
+</section>
+
+<!-- CALENDAR SECTION -->
+<section class="calendar-section">
+  <div class="section-wrap">
+    <span class="chapter-label fade-up">— Event Calendar —</span>
+    <h2 class="section-h2 fade-up">イベントカレンダー</h2>
+    <p class="body-text fade-up d1" style="max-width:560px;">
+      月ごとの開催スケジュールを確認できます。地域まつりや新しいイベントもこちらに随時追加されます。
+    </p>
+
+    <div class="calendar-embed-wrap fade-up d2">
+      <!--
+        ========================================================
+        【Googleカレンダーの埋め込み手順】
+
+        1. Google カレンダー (calendar.google.com) を開く
+        2. 左サイドバーの「マイカレンダー」から、
+           「Tomaru Hosono イベント」などの名前でカレンダーを新規作成
+        3. 作成したカレンダーの「…」→「設定と共有」を開く
+        4. 「カレンダーの公開設定」で「一般公開する」にチェック
+        5. 「カレンダーの統合」欄の「カレンダーを埋め込む」からHTMLコードを取得
+        6. 下記 <div class="calendar-placeholder"> を削除し、
+           取得した <iframe> コードをここに貼り付ける
+
+        iframeの推奨設定:
+          width="100%" height="500" frameborder="0" scrolling="no"
+          style="border:0"
+
+        カレンダーの背景色パラメータ例（URLに追加）:
+          &bgcolor=%23F3EEE5   （kinariカラー）
+          &color=%23C17A6F     （tokiカラー）
+          &showTitle=0&showPrint=0&showTabs=0&showCalendars=0
+        ========================================================
+      -->
+      <div class="calendar-placeholder">
+        <div class="calendar-placeholder-icon">◯</div>
+        <div class="calendar-placeholder-text">GOOGLE CALENDAR</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.15em;color:rgba(138,122,92,0.5);">
+          Googleカレンダーの設定後、ここに埋め込みコードを貼り付けてください
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-note fade-up">
+      <strong style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--toki);font-weight:400;">参加申込・お問い合わせ</strong><br>
+      各イベントへの参加申込はTomaru細野を通じて行います。申込締切は各イベントの2〜3週間前です。<br>
+      <em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(43,42,40,0.55);">To join any event, contact us via the booking form or chat. We will handle registration on your behalf.</em>
+    </div>
   </div>
 </section>
 
@@ -693,14 +1022,51 @@ footer {
 </footer>
 
 <script>
+// Nav scroll
 const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
+
+// Fade-in observer
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Category filter
+const catBtns = document.querySelectorAll('.cat-btn');
+const allCards = document.querySelectorAll('.t-card');
+const allGroups = document.querySelectorAll('.timeline-group');
+
+catBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update button states
+    catBtns.forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+
+    const cat = btn.dataset.cat;
+
+    // Show/hide cards
+    allCards.forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+
+    // Hide month groups with no visible cards
+    allGroups.forEach(group => {
+      const hasVisible = group.querySelector('.t-card.visible');
+      group.classList.toggle('hidden', !hasVisible);
+    });
+  });
+});
 </script>
 </body>
 </html>
