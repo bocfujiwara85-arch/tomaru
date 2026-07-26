@@ -360,6 +360,52 @@ footer {
 @media (max-width: 480px) {
   .exp-grid { grid-template-columns: 1fr; }
 }
+
+/* ── MOBILE NAV (2026-07-27) ── */
+/* モバイルで .nav-links が display:none になり、ページリンクと予約導線が消えていた問題への対応 */
+.nav-toggle { display: none; }
+.mobile-book-bar { display: none; }
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 44px; padding: 0; border: 0; background: none;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle span {
+    display: block; width: 24px; height: 1px; background: var(--sumi);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .nav.open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav.open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .nav.open .nav-links {
+    display: flex; flex-direction: column; align-items: stretch; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--kinari);
+    border-bottom: 1px solid rgba(138,122,92,0.2);
+    box-shadow: 0 12px 24px rgba(43,42,40,0.08);
+    padding: 4px 24px 20px;
+    max-height: calc(100vh - 76px); overflow-y: auto;
+  }
+  .nav.open .nav-links a {
+    padding: 16px 2px; font-size: 13px; letter-spacing: 0.18em;
+    border-bottom: 1px solid rgba(138,122,92,0.14);
+  }
+  .nav.open .nav-links .nav-book {
+    margin-top: 18px; text-align: center; padding: 15px 24px; border-bottom: 0;
+  }
+
+  .mobile-book-bar {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 190;
+    text-align: center; text-decoration: none;
+    padding: 15px 24px calc(15px + env(safe-area-inset-bottom));
+    background: var(--sumi); color: var(--kinari);
+    font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+    font-size: 12px; letter-spacing: 0.22em;
+  }
+  body { padding-bottom: 60px; }
+}
 </style>
 </head>
 <body>
@@ -367,7 +413,7 @@ footer {
 <!-- NAV -->
 <nav class="nav" id="main-nav">
   <a href="../index.html" class="brand">TOMARU HOSONO<small>OBANAZAWA, YAMAGATA</small></a>
-  <div class="nav-links">
+  <div class="nav-links" id="nav-links-menu">
     <a href="../index.html">ホーム</a>
     <a href="../rooms.html">宿について</a>
     <a href="../experiences.html">体験パッケージ</a>
@@ -375,6 +421,9 @@ footer {
     <a href="../area-guide.html">周辺ガイド</a>
     <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
   </div>
+  <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links-menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ARTICLE HERO -->
@@ -546,6 +595,30 @@ footer {
     if (window.scrollY > 60) { nav.classList.add('scrolled'); }
     else { nav.classList.remove('scrolled'); }
   });
+})();
+</script>
+
+<!-- MOBILE NAV (2026-07-27)：モバイル下部固定の予約導線 -->
+<a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="mobile-book-bar">空室を確認する</a>
+<script>
+(function () {
+  var nav = document.querySelector('.nav');
+  var toggle = document.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+  function close() {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'メニューを開く');
+  }
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  });
+  Array.prototype.forEach.call(nav.querySelectorAll('.nav-links a'), function (a) {
+    a.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
 </script>
 </body>
