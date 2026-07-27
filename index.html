@@ -518,6 +518,62 @@ footer {
   }
   body { padding-bottom: 60px; }
 }
+
+/* ── EXPERIENCES TEASER (2026-07-28) ── */
+/* 3列固定がインラインstyle直書きでメディアクエリで上書きできず、スマホでカードが
+   はみ出し（文書幅468px > 画面375px）文字幅65pxまで潰れていた問題への対応。
+   スマホは「横スクロール（1枚255px幅・スナップ）」で横並びを保つ。PCは従来どおり3列。 */
+.exp-teaser-wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; }
+.exp-teaser-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.exp-card {
+  display: block; padding: 40px 32px;
+  background: rgba(243,238,229,0.04);
+  text-decoration: none; transition: background 0.4s;
+}
+.exp-swipe-hint { display: none; }
+@media (max-width: 768px) {
+  .exp-teaser-wrap { padding: 0 24px; }
+  .exp-teaser-grid {
+    grid-template-columns: repeat(3, 78%);
+    gap: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    /* 画面端まで抜いて2枚目を覗かせ、スワイプできることを伝える */
+    margin: 0 -24px;
+    padding: 0 24px 14px;
+    scrollbar-width: none;
+  }
+  .exp-teaser-grid::-webkit-scrollbar { display: none; }
+  .exp-card { scroll-snap-align: start; padding: 32px 24px; }
+  /* 画面外のカードがfade-upで透明のまま残らないようにする */
+  .exp-teaser-grid > .fade-up { opacity: 1; transform: none; }
+  .exp-swipe-hint {
+    display: block; margin-top: 14px; text-align: center;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12px; letter-spacing: 0.2em; color: rgba(243,238,229,0.45);
+  }
+}
+
+/* ── INSTAGRAM LINK (2026-07-28) ── */
+/* サイト全10ページのナビ＋フッターにInstagram(@tomaru_hosono)導線を追加。
+   PCナビはアイコンのみ・スマホのハンバーガーメニュー内はアイコン＋文字。 */
+.nav-links a.nav-ig { display: inline-flex; align-items: center; gap: 8px; }
+.nav-ig svg { width: 17px; height: 17px; display: block; }
+.nav-ig-label { display: none; }
+@media (max-width: 768px) {
+  .nav-ig-label { display: inline; }
+}
+
+/* ── NAV MIDWIDTH (2026-07-28) ── */
+/* 中間幅（769〜1259px：タブレット横・小型ノート）ではナビ項目が折り返して
+   2〜3段に崩れていた（Instagramアイコン追加前から発生）。項目間を詰めて緩和する。 */
+@media (min-width: 769px) and (max-width: 1259px) {
+  .nav { padding: 24px 32px; }
+  .nav.scrolled { padding: 16px 32px; }
+  .nav-links { gap: 24px; }
+}
 </style>
 </head>
 <body>
@@ -533,6 +589,7 @@ footer {
     <a href="area-guide.html">周辺ガイド</a>
     <a href="journal/ginzan-hotaru-no-yoru.html">読みもの</a>
     <a href="index.html#access">アクセス</a>
+    <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram（@tomaru_hosono）を見る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span class="nav-ig-label">Instagram</span></a>
     <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
   </div>
   <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links-menu">
@@ -638,7 +695,7 @@ footer {
 
 <!-- EXPERIENCES TEASER -->
 <section id="experiences" style="padding: 120px 0; background: var(--sumi); color: var(--kinari);">
-  <div style="max-width: 1000px; margin: 0 auto; padding: 0 56px;">
+  <div class="exp-teaser-wrap">
     <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: rgba(193,122,111,0.7); letter-spacing: 0.35em; display: block; margin-bottom: 28px;">— Experience Packages —</span>
     <h2 style="font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.7; margin-bottom: 20px; max-width: 600px;" class="fade-up">
       泊まるだけじゃない、<br>細野と繋がる体験を。
@@ -646,26 +703,27 @@ footer {
     <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: rgba(243,238,229,0.6); letter-spacing: 0.1em; margin-bottom: 64px; max-width: 580px;" class="fade-up">
       Step beyond the house. Into the land, the mountain, and the people of Hosono.
     </p>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
-      <a href="exp-trekking.html" style="display: block; padding: 40px 32px; background: rgba(243,238,229,0.04); border-top: 2px solid rgba(92,106,78,0.5); text-decoration: none; transition: background 0.4s;" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="fade-up">
+    <div class="exp-teaser-grid">
+      <a href="exp-trekking.html" style="border-top: 2px solid rgba(92,106,78,0.5);" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="exp-card fade-up">
         <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; color: rgba(193,122,111,0.7); letter-spacing: 0.35em; display: block; margin-bottom: 14px;">April — October</span>
         <div style="font-size: 18px; font-weight: 400; color: var(--kinari); margin-bottom: 10px; letter-spacing: 0.06em;">里山トレッキング滞在</div>
         <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: rgba(243,238,229,0.6); margin-bottom: 20px;">Step into the mountains of Hosono.</div>
         <span style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.2em; color: var(--toki);">詳細を見る →</span>
       </a>
-      <a href="exp-farm.html" style="display: block; padding: 40px 32px; background: rgba(243,238,229,0.04); border-top: 2px solid rgba(138,122,92,0.4); text-decoration: none; transition: background 0.4s;" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="fade-up">
+      <a href="exp-farm.html" style="border-top: 2px solid rgba(138,122,92,0.4);" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="exp-card fade-up">
         <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; color: rgba(193,122,111,0.7); letter-spacing: 0.35em; display: block; margin-bottom: 14px;">May — November</span>
         <div style="font-size: 18px; font-weight: 400; color: var(--kinari); margin-bottom: 10px; letter-spacing: 0.06em;">農家と土を触る滞在</div>
         <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: rgba(243,238,229,0.6); margin-bottom: 20px;">Pick it. Eat it. That is the whole day.</div>
         <span style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.2em; color: var(--toki);">詳細を見る →</span>
       </a>
-      <a href="exp-soba.html" style="display: block; padding: 40px 32px; background: rgba(243,238,229,0.04); border-top: 2px solid rgba(193,122,111,0.4); text-decoration: none; transition: background 0.4s;" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="fade-up">
+      <a href="exp-soba.html" style="border-top: 2px solid rgba(193,122,111,0.4);" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='rgba(243,238,229,0.04)'" class="exp-card fade-up">
         <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; color: rgba(193,122,111,0.7); letter-spacing: 0.35em; display: block; margin-bottom: 14px;">July — November</span>
         <div style="font-size: 18px; font-weight: 400; color: var(--kinari); margin-bottom: 10px; letter-spacing: 0.06em;">そばオーナー年3回滞在</div>
         <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: rgba(243,238,229,0.6); margin-bottom: 20px;">Grow your own SOBA.</div>
         <span style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.2em; color: var(--toki);">詳細を見る →</span>
       </a>
     </div>
+    <span class="exp-swipe-hint">← swipe —</span>
     <div style="margin-top: 48px; text-align: center;">
       <a href="experiences.html" style="font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 300; color: var(--kinari); text-decoration: none; border: 1px solid rgba(243,238,229,0.35); padding: 16px 44px; letter-spacing: 0.28em; transition: all 0.4s;" onmouseover="this.style.background='rgba(243,238,229,0.08)'" onmouseout="this.style.background='transparent'">
         体験パッケージをすべて見る / View all experiences
@@ -795,6 +853,7 @@ footer {
     <a href="#access">アクセス</a>
     <a href="journal/ginzan-hotaru-no-yoru.html">読みもの</a>
     <a href="faq.html">よくある質問</a>
+    <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener">Instagram</a>
   </div>
   <div class="footer-info">
     山形県尾花沢市細野552<br>

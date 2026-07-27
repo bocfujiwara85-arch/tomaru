@@ -352,6 +352,25 @@ footer {
   }
   body { padding-bottom: 60px; }
 }
+
+/* ── INSTAGRAM LINK (2026-07-28) ── */
+/* サイト全10ページのナビ＋フッターにInstagram(@tomaru_hosono)導線を追加。
+   PCナビはアイコンのみ・スマホのハンバーガーメニュー内はアイコン＋文字。 */
+.nav-links a.nav-ig { display: inline-flex; align-items: center; gap: 8px; }
+.nav-ig svg { width: 17px; height: 17px; display: block; }
+.nav-ig-label { display: none; }
+@media (max-width: 768px) {
+  .nav-ig-label { display: inline; }
+}
+
+/* ── NAV MIDWIDTH (2026-07-28) ── */
+/* 中間幅（769〜1259px：タブレット横・小型ノート）ではナビ項目が折り返して
+   2〜3段に崩れていた（Instagramアイコン追加前から発生）。項目間を詰めて緩和する。 */
+@media (min-width: 769px) and (max-width: 1259px) {
+  .nav { padding: 24px 32px; }
+  .nav.scrolled { padding: 16px 32px; }
+  .nav-links { gap: 24px; }
+}
 </style>
 </head>
 <body>
@@ -367,6 +386,7 @@ footer {
     <a href="area-guide.html">周辺ガイド</a>
     <a href="journal/ginzan-hotaru-no-yoru.html">読みもの</a>
     <a href="index.html#access">アクセス</a>
+    <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram（@tomaru_hosono）を見る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span class="nav-ig-label">Instagram</span></a>
     <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
   </div>
   <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links-menu">
@@ -547,6 +567,7 @@ footer {
     <a href="events.html">イベント</a>
     <a href="index.html#access">アクセス</a>
     <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+    <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener">Instagram</a>
   </div>
   <div class="footer-info">
     山形県尾花沢市細野 — Hosono, Obanazawa, Yamagata<br>
