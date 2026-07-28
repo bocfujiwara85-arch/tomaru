@@ -566,5 +566,32 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
 </script>
+
+<!-- GA4 BOOK CLICK (2026-07-29)：beds24への遷移を book_click として送る -->
+<script>
+(function () {
+  var LABELS = {
+    'nav-book': 'nav',
+    'btn-primary': 'hero',
+    'btn-toki': 'cta',
+    'modal-direct': 'modal',
+    'mobile-book-bar': 'mobile_bar'
+  };
+  document.addEventListener('click', function (e) {
+    var el = e.target;
+    if (!el || !el.closest) return;
+    var a = el.closest('a[href*="beds24.com"]');
+    if (!a || typeof gtag !== 'function') return;
+    var label = 'other';
+    for (var key in LABELS) {
+      if (a.classList.contains(key)) { label = LABELS[key]; break; }
+    }
+    gtag('event', 'book_click', {
+      book_location: label,
+      book_page: location.pathname
+    });
+  });
+})();
+</script>
 </body>
 </html>
