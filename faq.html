@@ -366,7 +366,7 @@ footer {
     <a href="journal/ginzan-hotaru-no-yoru.html">読みもの</a>
     <a href="index.html#access">アクセス</a>
     <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram（@tomaru_hosono）を見る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span class="nav-ig-label">Instagram</span></a>
-    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+    <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="nav-book">予約する</a>
   </div>
   <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links-menu">
     <span></span><span></span><span></span>
@@ -659,7 +659,7 @@ footer {
   <span class="sub">The house is waiting. So are the mountains.</span>
   <div class="cta-btns">
     <a href="experiences.html" class="btn-white">体験パッケージを見る</a>
-    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
+    <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="btn-toki">空室を確認する / Check availability</a>
   </div>
 </section>
 
@@ -673,7 +673,7 @@ footer {
     <a href="events.html">イベント</a>
     <a href="area-guide.html">銀山温泉エリア</a>
     <a href="index.html#access">アクセス</a>
-    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener">予約する</a>
+    <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener">予約する</a>
     <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener">Instagram</a>
   </div>
   <div class="footer-info">
@@ -709,7 +709,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <!-- MOBILE NAV (2026-07-27)：モバイル下部固定の予約導線 -->
-<a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="mobile-book-bar">空室を確認する</a>
+<a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="mobile-book-bar">空室を確認する</a>
 <script>
 (function () {
   var nav = document.querySelector('.nav');
@@ -729,6 +729,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     a.addEventListener('click', close);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
+
+<!-- BEDS24 DEEP LINK (2026-08-08)：予約ページを「有効な日付・日本語・2名」で開く -->
+<script>
+(function () {
+  // 直前5日は料金を出さない設定（清掃リードタイム確保）のため、既定の到着日を JST の14日後にする
+  var LEAD_DAYS = 14;
+  var jst = new Date(Date.now() + 9 * 3600 * 1000 + LEAD_DAYS * 86400 * 1000);
+  var d = jst.getUTCFullYear() + '-' +
+          ('0' + (jst.getUTCMonth() + 1)).slice(-2) + '-' +
+          ('0' + jst.getUTCDate()).slice(-2);
+  var links = document.querySelectorAll('a[href*="beds24.com/booking2.php"]');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].href.indexOf('checkin=') !== -1) continue;
+    links[i].href = links[i].href + '&checkin=' + d + '&numnight=1';
+  }
 })();
 </script>
 

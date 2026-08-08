@@ -56,7 +56,7 @@
   },
   "potentialAction": {
     "@type": "ReserveAction",
-    "target": "https://beds24.com/booking2.php?propid=324479"
+    "target": "https://beds24.com/booking2.php?propid=324479&lang=ja&numadult=2"
   }
 }
 </script>
@@ -590,7 +590,7 @@ footer {
     <a href="journal/ginzan-hotaru-no-yoru.html">読みもの</a>
     <a href="index.html#access">アクセス</a>
     <a href="https://www.instagram.com/tomaru_hosono/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram（@tomaru_hosono）を見る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span class="nav-ig-label">Instagram</span></a>
-    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="nav-book">予約する</a>
+    <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="nav-book">予約する</a>
   </div>
   <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links-menu">
     <span></span><span></span><span></span>
@@ -606,7 +606,7 @@ footer {
     <div class="hero-en">The whole house, just for your group — the more you are, the less each pays.</div>
     <div class="hero-ctas">
       <a href="#rates" class="btn-outline">料金を見る</a>
-      <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-primary">空室を確認する</a>
+      <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="btn-primary">空室を確認する</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -835,7 +835,7 @@ footer {
   <span class="sub">— Reserve your quiet —</span>
   <div class="cta-btns">
     <a href="experiences.html" class="btn-white">体験パッケージを見る</a>
-    <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="btn-toki">今すぐ予約する</a>
+    <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="btn-toki">今すぐ予約する</a>
   </div>
   <span class="cta-note">— 銀山温泉まで車18分 · 1棟貸し · 最大8名 —</span>
 </section>
@@ -871,7 +871,7 @@ footer {
     <h3>ご予約・空室確認</h3>
     <p>下記よりご希望の方法でご予約ください。直接ご予約の方にはウェルカムギフトをご用意しています。</p>
     <div class="modal-options">
-      <a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="modal-option modal-direct">
+      <a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="modal-option modal-direct">
         <span>空室カレンダーを見る・予約する</span>
         <span class="arrow">&#x2192;</span>
       </a>
@@ -937,7 +937,7 @@ footer {
 </script>
 
 <!-- MOBILE NAV (2026-07-27)：モバイル下部固定の予約導線 -->
-<a href="https://beds24.com/booking2.php?propid=324479" target="_blank" rel="noopener" class="mobile-book-bar">空室を確認する</a>
+<a href="https://beds24.com/booking2.php?propid=324479&amp;lang=ja&amp;numadult=2" target="_blank" rel="noopener" class="mobile-book-bar">空室を確認する</a>
 <script>
 (function () {
   var nav = document.querySelector('.nav');
@@ -957,6 +957,23 @@ footer {
     a.addEventListener('click', close);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
+
+<!-- BEDS24 DEEP LINK (2026-08-08)：予約ページを「有効な日付・日本語・2名」で開く -->
+<script>
+(function () {
+  // 直前5日は料金を出さない設定（清掃リードタイム確保）のため、既定の到着日を JST の14日後にする
+  var LEAD_DAYS = 14;
+  var jst = new Date(Date.now() + 9 * 3600 * 1000 + LEAD_DAYS * 86400 * 1000);
+  var d = jst.getUTCFullYear() + '-' +
+          ('0' + (jst.getUTCMonth() + 1)).slice(-2) + '-' +
+          ('0' + jst.getUTCDate()).slice(-2);
+  var links = document.querySelectorAll('a[href*="beds24.com/booking2.php"]');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].href.indexOf('checkin=') !== -1) continue;
+    links[i].href = links[i].href + '&checkin=' + d + '&numnight=1';
+  }
 })();
 </script>
 
