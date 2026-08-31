@@ -40,12 +40,41 @@
   "description": "銀山温泉から車で18分。山形県尾花沢市細野の築100年の古民家を、1日1組・最大8名で一棟貸し。",
   "url": "https://tomaru-japan.com/",
   "image": "https://tomaru-japan.com/images/exterior-summer.jpg",
+  "email": "takahashi@tomaru-japan.com",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "細野552",
     "addressLocality": "尾花沢市",
     "addressRegion": "山形県",
     "addressCountry": "JP"
   },
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "住宅宿泊事業 届出番号",
+    "value": "M060054098"
+  },
+  "knowsLanguage": [
+    "ja",
+    "en"
+  ],
+  "priceRange": "¥20,000〜",
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "一棟貸し（他のゲストとの共用なし）",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "セルフチェックイン（キーボックス）",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "駐車場",
+      "value": true
+    }
+  ],
   "containsPlace": {
     "@type": "Accommodation",
     "occupancy": {
@@ -53,6 +82,43 @@
       "maxValue": 8,
       "unitText": "名"
     }
+  },
+  "makesOffer": {
+    "@type": "Offer",
+    "priceCurrency": "JPY",
+    "price": "20000",
+    "url": "https://tomaru-japan.com/#rates",
+    "availability": "https://schema.org/InStock",
+    "priceSpecification": [
+      {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "JPY",
+        "price": 20000,
+        "unitCode": "DAY",
+        "name": "基本料金（2名まで・1泊）"
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "JPY",
+        "price": 35000,
+        "unitCode": "DAY",
+        "name": "冬季基本料金（12〜3月・2名まで・1泊）"
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "JPY",
+        "price": 7000,
+        "unitCode": "DAY",
+        "name": "3名以降の追加（大人1名あたり・1泊）"
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "JPY",
+        "price": 2000,
+        "unitCode": "DAY",
+        "name": "お子さまの追加（1名あたり・1泊）"
+      }
+    ]
   },
   "potentialAction": {
     "@type": "ReserveAction",
@@ -858,6 +924,7 @@ footer {
   <div class="footer-info">
     山形県尾花沢市細野552<br>
     takahashi@tomaru-japan.com<br>
+    住宅宿泊事業 届出番号 M060054098<br>
     <br>
     &copy; 2026 Tomaru細野. All rights reserved.
   </div>
