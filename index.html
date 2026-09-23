@@ -376,20 +376,8 @@ body {
 }
 .access-map {
   aspect-ratio: 4/3;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 19px, rgba(138,122,92,0.08) 19px 20px),
-    repeating-linear-gradient(90deg, transparent 0 19px, rgba(138,122,92,0.08) 19px 20px),
-    #E8E0D0;
-  position: relative; display: flex; align-items: center; justify-content: center;
-}
-.map-pin {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--toki); box-shadow: 0 0 0 6px rgba(193,122,111,0.2);
-}
-.map-label-text {
-  position: absolute; bottom: 16px; right: 20px;
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 11px; color: var(--koshoku); letter-spacing: 0.15em;
+  background: #E8E0D0;
+  position: relative; overflow: hidden;
 }
 .access-list { list-style: none; }
 .access-list li {
@@ -831,8 +819,14 @@ footer {
     <h2 class="section-h2 fade-up">銀山は、訪ねる場所。<br>帰る場所は、ここ。</h2>
     <div class="access-grid fade-up">
       <div class="access-map">
-        <div class="map-pin"></div>
-        <div class="map-label-text">Obanazawa, Yamagata</div>
+        <iframe
+          src="https://www.google.com/maps?q=38.5400233,140.4638047&z=15&output=embed"
+          width="100%" height="100%"
+          style="border:0; position:absolute; inset:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Tomaru細野の地図（山形県尾花沢市細野552）"
+        ></iframe>
       </div>
       <div>
         <ul class="access-list">
